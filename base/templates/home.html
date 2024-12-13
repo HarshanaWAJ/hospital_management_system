@@ -143,9 +143,9 @@
                     <div class="card p-4" style="border-radius: 10px;">
                         <h4 class="mb-4" style="color: #3A9D6F;">Send Us a Message</h4>
     
-                        <form action="{% url 'home' %}" method="POST">
+                        <form action="{% url 'home' %}" method="POST" class="contact">
                             {% csrf_token %}
-                            {{ contact_form.as_p }}  <!-- This will render the form fields -->
+                            {{ contact_form.as_p }}  
                             <button type="submit" value="submit" class="btn btn-primary btn-lg">Send Message</button>
                         </form>
                     </div>
@@ -153,5 +153,11 @@
             </div>
         </div>
     </section>
+
+    <link rel="stylesheet" href="{% static 'css/home_style.css' %}">
+    <!-- SweetAlert Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom Alert Script -->
+    <script src="{% static 'js/home_alert.js' %}"></script>
 
 {% endblock %}
