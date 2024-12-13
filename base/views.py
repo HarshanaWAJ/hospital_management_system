@@ -8,7 +8,7 @@ def home(request):
     contact_form = MessageForm()
 
     if request.method == 'POST':
-        print(request.post)
+        print(request.POST)
 
     context = {'contact_form': contact_form}
     return render(request, 'home.html', context)
