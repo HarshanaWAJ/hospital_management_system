@@ -1,0 +1,118 @@
+/* General Styling for the Navbar */
+.navbar {
+    background-color: #e8f5ff; /* Light, calming blue background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    position: sticky; /* Keeps the navbar at the top */
+    top: 0;
+    z-index: 1000; /* Ensures navbar stays above other content */
+}
+
+/* Navbar brand */
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #0066cc; /* Primary blue color for the brand */
+    text-transform: uppercase; /* Makes brand text more prominent */
+    letter-spacing: 1px; /* Adds spacing for a clean look */
+    transition: color 0.3s ease-in-out, transform 0.2s ease; /* Smooth color and transform transition */
+}
+
+.navbar-brand:hover {
+    color: #004a99; /* Darker blue on hover */
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    color: #333; /* Dark gray for text */
+    padding: 0.75rem 1.25rem; /* Larger padding for better clickability */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #0066cc; /* Blue background on hover */
+    color: white; /* Text turns white */
+    border-radius: 5px; /* Rounded corners for links */
+}
+
+/* Active link */
+.navbar-nav .nav-link.active {
+    background-color: #004a99; /* Darker blue for active link */
+    color: white;
+    border-radius: 5px; /* Rounded corners for active link */
+}
+
+/* Navbar buttons */
+.btn {
+    font-size: 1rem;
+    border-radius: 25px; /* Rounded edges for buttons */
+    padding: 0.5rem 1.25rem;
+    transition: all 0.3s ease; /* Smooth transition for button styles */
+}
+
+/* Primary button (Register) */
+.btn-primary {
+    background-color: #0066cc; /* Primary color */
+    border-color: #0066cc;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #005bb5; /* Darker blue on hover */
+    border-color: #005bb5; /* Border color changes on hover */
+}
+
+/* Outline button (Login) */
+.btn-outline-primary {
+    border-color: #0066cc;
+    color: #0066cc;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0066cc;
+    color: white;
+    border-color: #005bb5;
+    transform: translateY(-3px); /* Slight raise effect on hover */
+}
+
+/* Media Queries for smaller screens */
+
+/* For tablets and below (max-width 991px) */
+@media (max-width: 991px) {
+    .navbar-nav {
+        text-align: center;
+        margin-top: 10px;
+    }
+    .navbar-nav .nav-link {
+        padding: 1rem;
+    }
+    .navbar-nav .btn {
+        width: 100%; /* Ensure buttons take up full width on smaller screens */
+        margin-top: 10px;
+    }
+}
+
+/* For mobile screens (max-width 576px) */
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.5rem; /* Slightly smaller brand font size on small screens */
+    }
+    .navbar-nav .nav-link {
+        font-size: 1.2rem; /* Increase link font size for better readability */
+        padding: 1rem; /* More padding for mobile view */
+    }
+    .navbar-nav .btn {
+        font-size: 1.1rem; /* Increase button font size for mobile */
+        padding: 0.75rem 1.5rem; /* Bigger buttons on mobile */
+    }
+}
+
+/* Smooth scrolling for navbar links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Optional: For better accessibility on focus */
+.navbar-nav .nav-link:focus {
+    outline: 3px solid #0066cc; /* Focus outline for better accessibility */
+}

@@ -1,0 +1,117 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Welcome to the Hospital Management System{% endblock %}
+
+{% block content %}
+    <!-- Landing Page Section -->
+    <section class="hero text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Welcome to the Hospital Management System</h1>
+            <p class="lead">Efficiently manage patient records, appointments, and hospital services.</p>
+            <a href="#services" class="btn btn-primary btn-lg">Explore Our Services</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="display-5">What We Do</h2>
+                    <p>Our Hospital Management System helps in streamlining the operations of a hospital by managing appointments, patient records, and staff information efficiently. It's designed to provide comprehensive solutions that support all aspects of hospital management.</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://via.placeholder.com/500" alt="Hospital" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Features Section -->
+    <section class="features bg-light py-5" id="services">
+        <div class="container">
+            <h2 class="text-center display-5">Our Key Features</h2>
+            <div class="row">
+                <!-- Appointment Management Card -->
+                <div class="col-md-4 text-center">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="Appointment Management">
+                        <div class="card-body">
+                            <h4 class="card-title">Appointment Management</h4>
+                            <p class="card-text">Efficiently manage appointments, track schedules, and minimize wait times.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patient Records Card -->
+                <div class="col-md-4 text-center">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="Patient Records">
+                        <div class="card-body">
+                            <h4 class="card-title">Patient Records</h4>
+                            <p class="card-text">Store and retrieve patient data securely, including medical history and treatments.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Staff Management Card -->
+                <div class="col-md-4 text-center">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="Staff Management">
+                        <div class="card-body">
+                            <h4 class="card-title">Staff Management</h4>
+                            <p class="card-text">Keep track of hospital staff, their roles, and availability in real-time.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 24h by 365 Days Service Card -->
+                <div class="col-md-4 text-center">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="24h Service">
+                        <div class="card-body">
+                            <h4 class="card-title">24h by 365 Days Service</h4>
+                            <p class="card-text">Provide continuous service to ensure patient care is available at any time of the day or night.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secure Payment Card -->
+                <div class="col-md-4 text-center">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="Secure Payment">
+                        <div class="card-body">
+                            <h4 class="card-title">Secure Payment</h4>
+                            <p class="card-text">Secure payment processing for patients to make payments conveniently and safely.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Support Card -->
+                <div class="col-md-4 text-center">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/500x300" class="card-img-top" alt="Customer Support">
+                        <div class="card-body">
+                            <h4 class="card-title">Customer Support</h4>
+                            <p class="card-text">24/7 customer support to assist patients with any queries or concerns.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Call to Action Section -->
+    <section class="cta text-center py-5 bg-primary text-white">
+        <div class="container">
+            <h2>Ready to Simplify Hospital Management?</h2>
+            <p>Get started with our system today and experience seamless hospital management.</p>
+            <a href="/signup" class="btn btn-light btn-lg">Get Started</a>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!-- Link to the CSS file -->
+<link rel="stylesheet" href="{% static 'css/home_style.css' %}">
