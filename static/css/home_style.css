@@ -1,6 +1,6 @@
 /* Hero Section (Landing Page) */
 .hero {
-    background: url('https://via.placeholder.com/1200x500') no-repeat center center !important;
+    background: url('https://via.placeholder.com/1200x500') no-repeat center center;
     background-size: cover;
     color: white;
     position: relative;
@@ -20,8 +20,8 @@
 .hero h1,
 .hero p {
     position: relative;
-    z-index: 1;
-    animation: fadeIn 2s ease-out;
+    z-index: 10; /* Ensure text is above overlay */
+    animation: fadeIn 5s ease-out;
 }
 
 @keyframes fadeIn {
@@ -31,17 +31,19 @@
 
 /* Features Cards Enhancements */
 .card {
+    margin-top: 10px;
+    margin-bottom: 10px;
     border: none;
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border-radius: 15px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    overflow: hidden; /* Ensure that the content inside the card does not overflow during the hover effect */
+    overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-10px); /* Lift effect on hover */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
-    background-color: #f8f8f8; /* Slight background color change on hover */
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+    background-color: #f8f8f8; 
 }
 
 .card-img-top {
@@ -72,7 +74,7 @@
 }
 
 .card:hover .card-title {
-    color: #0066cc; /* Change text color on hover */
+    color: #4C9A8B; /* Soft teal for title on hover */
 }
 
 .card-text {
@@ -87,7 +89,7 @@
 
 /* Call-to-Action Section */
 .cta {
-    background: linear-gradient(135deg, #0066cc, #004a99);
+    background: linear-gradient(135deg, #4C9A8B, #2A7F57); /* Teal to darker green gradient */
     color: white;
     text-align: center;
     padding: 3rem 0;
@@ -113,35 +115,79 @@
     border-radius: 30px; /* Rounded button */
     font-size: 1.1rem;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 10; /* Ensure button is above other elements */
 }
 
 .btn-primary {
-    background-color: #0066cc;
-    border-color: #0066cc;
+    background-color: #4C9A8B; 
+    border-color: #4C9A8B;
 }
 
 .btn-primary:hover {
-    background-color: #005bb5;
-    border-color: #005bb5;
+    background-color: #3A8577; /* Darker teal on hover */
+    border-color: #3A8577;
     transform: translateY(-3px); /* Button lifts on hover */
 }
 
 .btn-light {
     background-color: #ffffff;
-    color: #0066cc;
-    border: 2px solid #0066cc;
+    color: #4C9A8B; /* Soft teal for text */
+    border: 2px solid #4C9A8B; /* Button border matches teal */
 }
 
 .btn-light:hover {
-    background-color: #0066cc;
+    background-color: #4C9A8B;
     color: white;
-    border-color: #005bb5;
+    border-color: #3A8577; /* Darker teal on hover */
     transform: translateY(-3px); /* Button lifts on hover */
 }
 
 /* General Layout Improvements */
 .container {
     margin-top: 50px;
+}
+
+/* Ensure button is clickable and visible */
+.hero .btn {
+    position: relative;
+    z-index: 10;
+    padding: 0.8rem 2rem; /* Ensure the button has enough padding */
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero .btn-primary {
+    background-color: #4C9A8B;
+    border-color: #4C9A8B;
+}
+
+.hero .btn-primary:hover {
+    background-color: #3A8577;
+    border-color: #3A8577;
+    transform: translateY(-3px); /* Button lifts on hover */
+}
+
+.hero .btn-light {
+    background-color: #ffffff;
+    color: #4C9A8B;
+    border: 2px solid #4C9A8B;
+}
+
+.hero .btn-light:hover {
+    background-color: #4C9A8B;
+    color: white;
+    border-color: #3A8577;
+    transform: translateY(-3px);
+}
+
+.no-hover {
+    color: inherit;
+    
+}
+.no-hover:hover {
+    color: inherit;
+    
 }
 
 @media (max-width: 767px) {

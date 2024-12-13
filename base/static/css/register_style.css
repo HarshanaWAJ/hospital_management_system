@@ -1,0 +1,223 @@
+/* Global styling for the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F5; /* Light neutral gray background for the entire page */
+    color: #333333; /* Dark gray for text for high readability */
+}
+
+/* Section Styling */
+section.h-custom {
+    background: linear-gradient(135deg, rgba(58, 157, 111, 0.8), rgba(76, 154, 139, 0.8));
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+/* Card Container */
+.card-registration {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+/* Left Column Styling */
+.card-body .col-lg-6 {
+    padding: 30px;
+}
+
+h3.fw-normal {
+    color: #3A9D6F; /* Primary Green for headings */
+}
+
+/* Form Styling */
+.form-outline {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Input fields */
+input[type="text"], select {
+    background-color: #F5F5F5; /* Light background */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #4C9A8B; /* Secondary Teal for focus border */
+    box-shadow: 0 0 5px rgba(76, 154, 139, 0.5); /* Light teal glow on focus */
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: #999; /* Light placeholder text */
+}
+
+/* Form labels */
+.form-label {
+    color: #333333; /* Dark text for labels */
+    font-size: 0.9rem;
+}
+
+/* Select styling */
+select {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: #F5F5F5;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 4px;
+}
+
+/* Right Column Styling */
+.card-body .col-lg-6.bg-indigo {
+    background-color: #4C9A8B; /* Secondary Teal for right column background */
+    color: white;
+    padding: 30px;
+}
+
+.card-body .col-lg-6.bg-indigo h3 {
+    color: #ffffff; /* White text for the heading */
+}
+
+/* Checkbox Styling */
+.form-check-label {
+    color: #fff;
+    font-size: 0.875rem;
+}
+
+.form-check-input:checked {
+    background-color: #3A9D6F; /* Primary Green for checked box */
+    border-color: #3A9D6F;
+}
+
+.form-check-input {
+    transition: background-color 0.3s ease;
+}
+
+/* Button Styling */
+button, .btn {
+    background-color: #4C9A8B; /* Secondary Teal for buttons */
+    border: 2px solid #4C9A8B; /* Button border matches background */
+    color: white;
+    padding: 0.6rem 1.5rem; /* Padding for buttons */
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #3A8577; /* Darker teal on hover */
+    border-color: #3A8577; /* Darker teal border on hover */
+}
+
+button:active, .btn:active {
+    background-color: #2A7F57; /* Dark Green for active state */
+    border-color: #2A7F57;
+}
+
+button:focus, .btn:focus {
+    outline: 2px solid #4C9A8B; /* Focus outline in Secondary Teal */
+    outline-offset: 2px;
+}
+.btn-outline-white {
+    border: 1px solid #ffffff; /* White border */
+    color: #ffffff; /* White text */
+    background-color: transparent; /* Transparent background */
+}
+
+.btn-outline-white:hover {
+    border: 1px solid #ffffff; /* White border */
+    color: #ffffff; /* White text */
+}
+
+.btn-outline-white:focus {
+    border-color: #ffffff; /* White border on focus */
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5); /* White focus ring */
+}
+
+/* Form Section Responsiveness */
+@media (max-width: 767px) {
+    .card-body {
+        flex-direction: column;
+    }
+
+    .col-lg-6 {
+        padding: 20px;
+    }
+
+    .card-body .col-lg-6.bg-indigo {
+        background-color: #3A9D6F; /* Primary Green for mobile view */
+    }
+
+    h3.fw-normal {
+        font-size: 1.2rem;
+    }
+
+    .form-outline input, .form-outline select {
+        font-size: 1.1rem; /* Slightly larger input text on mobile */
+    }
+
+    button, .btn {
+        padding: 0.75rem 1.25rem; /* Adjust button size for mobile */
+    }
+}
+
+/* General Styling for Links */
+a {
+    color: #3A9D6F; /* Primary Green for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #4C9A8B; /* Secondary Teal on hover for links */
+}
+
+/* Footer Section */
+footer {
+    background-color: #F5F5F5; /* Light gray for footer background */
+    color: #333333; /* Dark gray text for footer */
+    padding: 30px 0;
+    text-align: center;
+}
+
+footer .footer-about p {
+    font-size: 1rem;
+    color: #333333; /* Dark gray text for footer paragraphs */
+}
+
+/* Responsiveness for form fields */
+input[type="text"], select {
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    input[type="text"], select {
+        padding: 1rem;
+    }
+}
+
+.login-link:hover {
+    color: #3A9D6F;
+    text-decoration: none;
+}

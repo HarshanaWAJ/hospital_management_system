@@ -4,7 +4,7 @@
 
 {% block content %}
     <!-- Landing Page Section -->
-    <section class="hero text-center py-5">
+    <section class="hero text-center py-5" id="hero">
         <div class="container">
             <h1 class="display-4">Welcome to the Hospital Management System</h1>
             <p class="lead">Efficiently manage patient records, appointments, and hospital services.</p>
@@ -13,7 +13,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="about py-5">
+    <section class="about py-5" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -101,17 +101,57 @@
         </div>
     </section>
 
-
-    <!-- Call to Action Section -->
-    <section class="cta text-center py-5 bg-primary text-white">
+    <section id="contact" class="py-5">
         <div class="container">
-            <h2>Ready to Simplify Hospital Management?</h2>
-            <p>Get started with our system today and experience seamless hospital management.</p>
-            <a href="/signup" class="btn btn-light btn-lg">Get Started</a>
+            <h2 class="text-center mb-5" style="color: #3A9D6F;">Contact Us</h2>
+    
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card p-4" style="border-radius: 10px;">
+                        <h4 class="mb-4" style="color: #3A9D6F;">Contact Information</h4>
+    
+                        <!-- Address -->
+                        <div class="mb-3">
+                            <h5>Address:</h5>
+                            <p>123, Main Street, Colombo 07, Sri Lanka</p>
+                        </div>
+    
+                        <!-- Phone -->
+                        <div class="mb-3">
+                            <h5>Phone Number:</h5>
+                            <p><a href="tel:+94112345678" class="no-hover">+94 11 234 5678</a></p>
+                            <p><a href="tel:+94712345678" class="no-hover">+94 71 234 5678</a></p>
+                        </div>
+    
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <h5>Email Address:</h5>
+                            <p><a href="mailto:info@hmshospital.lk" class="no-hover">info@hmshospital.lk</a></p>
+                        </div>
+    
+                        <!-- Working Hours -->
+                        <div class="mb-3">
+                            <h5>Working Hours:</h5>
+                            <p>24 Hours a Day, 7 Days a Week</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Contact Form -->
+                <div class="col-lg-6">
+                    <div class="card p-4" style="border-radius: 10px;">
+                        <h4 class="mb-4" style="color: #3A9D6F;">Send Us a Message</h4>
+    
+                        <form action="{% url 'home' %}" method="POST">
+                            {% csrf_token %}
+                            {{ contact_form.as_p }}  <!-- This will render the form fields -->
+                            <button type="submit" value="submit" class="btn btn-primary btn-lg">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
 {% endblock %}
-
-<!-- Link to the CSS file -->
-<link rel="stylesheet" href="{% static 'css/home_style.css' %}">

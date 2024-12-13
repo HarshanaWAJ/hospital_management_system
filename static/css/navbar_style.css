@@ -1,24 +1,29 @@
 /* General Styling for the Navbar */
 .navbar {
-    background-color: #e8f5ff; /* Light, calming blue background */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    background-color: #f5f5f5; /* Light, neutral background (soft gray) */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     position: sticky; /* Keeps the navbar at the top */
     top: 0;
     z-index: 1000; /* Ensures navbar stays above other content */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+}
+
+.navbar:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
 }
 
 /* Navbar brand */
 .navbar-brand {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #0066cc; /* Primary blue color for the brand */
+    color: #3A9D6F; /* Calm green for the brand */
     text-transform: uppercase; /* Makes brand text more prominent */
     letter-spacing: 1px; /* Adds spacing for a clean look */
-    transition: color 0.3s ease-in-out, transform 0.2s ease; /* Smooth color and transform transition */
+    transition: color 0.3s ease-in-out, transform 0.3s ease; /* Smooth color and transform transition */
 }
 
 .navbar-brand:hover {
-    color: #004a99; /* Darker blue on hover */
+    color: #2a7f57; /* Slightly darker green on hover */
 }
 
 /* Navbar links */
@@ -26,58 +31,50 @@
     font-size: 1rem;
     color: #333; /* Dark gray for text */
     padding: 0.75rem 1.25rem; /* Larger padding for better clickability */
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth transition */
 }
 
 .navbar-nav .nav-link:hover {
-    background-color: #0066cc; /* Blue background on hover */
+    background-color: #4c9a8b; /* Soft teal background on hover */
     color: white; /* Text turns white */
-    border-radius: 5px; /* Rounded corners for links */
+    transform: translateY(-2px); /* Slight lift effect */
 }
 
 /* Active link */
 .navbar-nav .nav-link.active {
-    background-color: #004a99; /* Darker blue for active link */
+    background-color: #4c9a8b; /* Soft teal for active link */
     color: white;
-    border-radius: 5px; /* Rounded corners for active link */
+    transform: translateY(-2px); /* Slight lift effect for active link */
 }
 
-/* Navbar buttons */
-.btn {
-    font-size: 1rem;
-    border-radius: 25px; /* Rounded edges for buttons */
-    padding: 0.5rem 1.25rem;
-    transition: all 0.3s ease; /* Smooth transition for button styles */
+/* Login button styles */
+.navbar-nav .btn-outline-primary {
+    font-size: 1.1rem; /* Slightly larger font size */
+    padding: 0.6rem 1.5rem; /* More padding for better click area */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    border-color: #4c9a8b;
+    color: #4c9a8b;
 }
 
-/* Primary button (Register) */
-.btn-primary {
-    background-color: #0066cc; /* Primary color */
-    border-color: #0066cc;
+.navbar-nav .btn-outline-primary:hover {
+    background-color: #4c9a8b;
     color: white;
+    border-color: #3a8577; /* Darker teal on hover */
+    transform: translateY(-2px); /* Slight lift effect for hover */
 }
 
-.btn-primary:hover {
-    background-color: #005bb5; /* Darker blue on hover */
-    border-color: #005bb5; /* Border color changes on hover */
+.navbar-nav .btn-outline-primary:active {
+    background-color: #3a8577; /* Darker teal when active */
+    border-color: #2e6e5e; /* Darker border color */
+    transform: translateY(1px); /* Slight press effect */
 }
 
-/* Outline button (Login) */
-.btn-outline-primary {
-    border-color: #0066cc;
-    color: #0066cc;
+.navbar-nav .btn-outline-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 154, 139, 0.5); /* Focus ring for accessibility */
 }
 
-.btn-outline-primary:hover {
-    background-color: #0066cc;
-    color: white;
-    border-color: #005bb5;
-    transform: translateY(-3px); /* Slight raise effect on hover */
-}
-
-/* Media Queries for smaller screens */
-
-/* For tablets and below (max-width 991px) */
+/* Mobile responsiveness */
 @media (max-width: 991px) {
     .navbar-nav {
         text-align: center;
@@ -114,5 +111,25 @@ html {
 
 /* Optional: For better accessibility on focus */
 .navbar-nav .nav-link:focus {
-    outline: 3px solid #0066cc; /* Focus outline for better accessibility */
+    outline: 3px solid #4c9a8b; /* Focus outline for better accessibility */
+}
+
+/* Navbar toggle button for smaller screens */
+.navbar-toggler {
+    border-color: #4c9a8b; /* Toggler button matches accent color */
+}
+
+.navbar-toggler-icon {
+    background-color: #4c9a8b; /* Toggler icon color */
+}
+
+/* Navbar on mobile screens */
+@media (max-width: 576px) {
+    .navbar-nav {
+        margin-top: 20px;
+    }
+    .navbar-nav .nav-link {
+        padding: 1rem;
+        font-size: 1.1rem; /* Adjust font size for better readability */
+    }
 }

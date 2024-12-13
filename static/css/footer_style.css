@@ -1,0 +1,142 @@
+/* Styling for the footer */
+footer {
+    background-color: #3A9D6F; /* Light neutral gray background */
+    color: #F5F5F5; /* Dark gray text for high readability */
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+footer h4 {
+    font-size: 18px;
+    color: #F5F5F5; /* Primary Green for the headings */
+    font-weight: bold;
+    margin-bottom: 20px; /* Add space below the heading */
+}
+
+footer .footer-about p,
+footer .footer-contact ul,
+footer .footer-links ul {
+    font-size: 14px;
+    color: #F5F5F5; /* Dark gray text for content */
+    line-height: 1.5;
+}
+
+footer .footer-contact a,
+footer .footer-links a {
+    color: #3A9D6F; /* Primary Green for links */
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+footer .footer-contact a:hover,
+footer .footer-links a:hover {
+    color: #ffffff; /* White text on hover */
+    background-color: #4C9A8B; /* Secondary Teal on hover */
+}
+
+footer .footer-contact a:active,
+footer .footer-links a:active {
+    color: #ffffff; /* Keep text white */
+    background-color: #3A8577; /* Darker Teal for active state */
+}
+
+footer .social-icon {
+    font-size: 28px; /* Larger icon size */
+    color: #3A9D6F; /* Primary Green for social icons */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+footer .social-icon:hover {
+    color: #4C9A8B; /* Secondary Teal on hover */
+    transform: scale(1.2); /* Slightly enlarge icon on hover */
+}
+
+footer .social-icon:focus {
+    outline: 2px solid #4C9A8B; /* Focus outline in teal */
+}
+
+/* Footer padding and alignment */
+footer .container {
+    max-width: 1140px;
+}
+
+footer .footer-copyright {
+    font-size: 14px;
+    color: #F5F5F5; /* Dark gray for copyright text */
+    margin-top: 15px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 767px) {
+    footer .row {
+        text-align: center;
+    }
+    footer .col-md-4 {
+        margin-bottom: 20px;
+    }
+    footer .social-icon {
+        font-size: 24px;
+    }
+    footer .social-icons {
+        margin-top: 10px;
+    }
+}
+
+/* Button and Link Hover/Active States */
+button, a.button {
+    background-color: #4C9A8B; /* Secondary Teal for buttons */
+    border: 2px solid #4C9A8B; /* Border matching the button background */
+    color: #ffffff; /* White text for buttons */
+    padding: 0.6rem 1.5rem; /* Button padding */
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+button:hover, a.button:hover {
+    background-color: #4C9A8B; /* Light teal background */
+    color: #ffffff; /* White text */
+    border-color: #3A8577; /* Darker teal on hover */
+}
+
+button:active, a.button:active {
+    background-color: #3A8577; /* Darker teal on active press */
+    color: #ffffff;
+    border-color: #3A8577; /* Darker teal for active state */
+}
+
+/* Focus Outline for Buttons and Links */
+button:focus, a.button:focus {
+    outline: 2px solid #4C9A8B; /* Focus outline in teal */
+}
+
+/* Link Hover and Focus Effects */
+a {
+    color: #F5F5F5; /* Dark gray text color for default */
+    text-decoration: none;
+    font-size: 1rem; /* Default font size */
+}
+
+a:hover {
+    color: #4C9A8B; /* Secondary teal color on hover */
+}
+
+a:focus {
+    outline: 2px solid #4C9A8B; /* Focus outline in teal for accessibility */
+}
+
+/* General Typography and Spacing */
+footer h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+footer p, footer ul {
+    font-size: 14px;
+}
+
+footer a {
+    font-size: 14px;
+}

@@ -1,0 +1,189 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Welcome to the Hospital Management System{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="card-body p-0">
+              <div class="row g-0">
+                <div class="col-lg-6">
+                  <div class="p-5">
+                    <h3 class="fw-normal mb-5" style="color: #3A9D6F;">General Information</h3>
+  
+                    <div class="mb-4 pb-2">
+                        <select data-mdb-select-init>
+                          <option value="" disabled selected>Select Title</option>
+                          <option value="Mr">Mr.</option>
+                          <option value="Mrs">Mrs.</option>
+                          <option value="Miss">Miss</option>
+                        </select>
+                    </div>                      
+  
+                    <div class="row">
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline">
+                            <label class="form-label" for="first_name">First name</label>
+                          <input type="text" id="first_name" class="form-control form-control-lg" />
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline">
+                            <label class="form-label" for="last_name">Last name</label>
+                          <input type="text" id="last_name" class="form-control form-control-lg" />
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="mb-4 pb-2">
+                      <select data-mdb-select-init>
+                        <option value="" disabled selected>Gender</option>
+                        <option value="2">Male</option>
+                        <option value="3">Female</option>
+                      </select>
+                    </div>
+  
+                    <div class="mb-4 pb-2">
+                      <div data-mdb-input-init class="form-outline">
+                        <label class="form-label" for="dob">Date of Birth</label>
+                        <input type="date" id="dob" class="form-control form-control-lg" />
+                      </div>
+                    </div>
+  
+                    <div class="mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline">
+                          <label class="form-label" for="email_address">Email Address</label>
+                          <input type="email" id="email_address" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+  
+                    <div class="mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline">
+                          <label class="form-label" for="password">Password</label>
+                          <input type="password" id="password" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+
+                    <div class="mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline">
+                          <label class="form-label" for="password">Confirm Password</label>
+                          <input type="password" id="confirm_password" class="form-control form-control-lg" />
+                        </div>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="mb-4 pb-2">
+                      <p class="text-center">
+                        Already have an account? <a href="{% url 'login' %}" style="color: #3A9D6F; font-weight: bold;" class="login-link">Login here</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Contact Details Section -->
+                <div class="col-lg-6 bg-indigo text-white">
+                  <div class="p-5">
+                    <h3 class="fw-normal mb-5">Contact Details</h3>
+  
+                    <div class="mb-4 pb-2">
+                      <div data-mdb-input-init class="form-outline form-white">
+                        <input type="text" id="street_address" class="form-control form-control-lg" />
+                        <label class="form-label" for="street_address">Street Address</label>
+                      </div>
+                    </div>
+  
+                    <div class="mb-4 pb-2">
+                      <div data-mdb-input-init class="form-outline form-white">
+                        <input type="text" id="street_name" class="form-control form-control-lg" />
+                        <label class="form-label" for="street_name">Street Name</label>
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-5 mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline form-white">
+                          <input type="text" id="postal_code" class="form-control form-control-lg" />
+                          <label class="form-label" for="postal_code">Postal Code</label>
+                        </div>
+                      </div>
+                      <div class="col-md-7 mb-4 pb-2">
+                        <div data-mdb-input-init class="form-outline form-white">
+                          <input type="text" id="town" class="form-control form-control-lg" />
+                          <label class="form-label" for="town">Town</label>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="mb-4 pb-2">
+                    <div data-mdb-input-init class="form-outline form-white">
+                        <input type="text" id="country" class="form-control form-control-lg" value="Sri Lanka" readonly />
+                        <label class="form-label" for="country">Country</label>
+                    </div>
+                    </div>
+
+                    <!-- Contact Number Section -->
+                    <div class="mb-4 pb-2">
+                        <h6 class="fw-normal mb-2" style="color: #333333; font-weight: bold;">Contact Number:</h6>
+                        <div class="row">
+                          <div class="col-md-5 mb-4 pb-2">
+                            <div data-mdb-input-init class="form-outline form-white">
+                              <input type="text" id="code" class="form-control form-control-lg" />
+                              <label class="form-label" for="code">Code +</label>
+                            </div>
+                          </div>
+                          <div class="col-md-7 mb-4 pb-2">
+                            <div data-mdb-input-init class="form-outline form-white">
+                              <input type="text" id="contact_no" class="form-control form-control-lg" />
+                              <label class="form-label" for="contact_no">Phone Number</label>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact Section -->
+                    <div class="mb-4 pb-2">
+                        <h6 class="fw-normal mb-2" style="color: #333333; font-weight: bold;">Emergency Contact Number:</h6>
+                        <div class="row">
+                          <div class="col-md-5 mb-4 pb-2">
+                            <div data-mdb-input-init class="form-outline form-white">
+                              <input type="text" id="emergency_code" class="form-control form-control-lg" />
+                              <label class="form-label" for="emergency_code">Code +</label>
+                            </div>
+                          </div>
+                          <div class="col-md-7 mb-4 pb-2">
+                            <div data-mdb-input-init class="form-outline form-white">
+                              <input type="text" id="emergency_contact_no" class="form-control form-control-lg" />
+                              <label class="form-label" for="emergency_contact_no">Phone Number</label>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+  
+                    <div class="form-check d-flex justify-content-start mb-4 pb-3">
+                      <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" />
+                      <label class="form-check-label text-white" for="form2Example3">
+                        I do accept the <a href="#!" class="text-white"><u>Terms and Conditions</u></a> of your
+                        site.
+                      </label>
+                    </div>
+  
+                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg form-outline btn-outline-white"
+                        data-mdb-ripple-color="dark">Register
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Link to the CSS file -->
+<link rel="stylesheet" href="{% static 'css/register_style.css' %}">
+{% endblock %}
