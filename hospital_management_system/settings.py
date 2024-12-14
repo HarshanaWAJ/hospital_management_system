@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     # Custom Apps Registration
     'base',
-    'patient_management',
+    'appoinments',
 ]
 
 MIDDLEWARE = [
