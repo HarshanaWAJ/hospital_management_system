@@ -1,10 +1,12 @@
 /* Hero Section (Landing Page) */
 .hero {
-    background: url('https://via.placeholder.com/1200x500') no-repeat center center;
+    background: url('{% static "images/banner.png" %}') no-repeat center center;
     background-size: cover;
     color: white;
     position: relative;
     overflow: hidden;
+    height: 100vh; /* Full-screen height for the hero section */
+    padding: 5rem 0; /* Add padding to vertically center content */
 }
 
 .hero::after {
@@ -92,28 +94,28 @@
     background: linear-gradient(135deg, #4C9A8B, #2A7F57); /* Teal to darker green gradient */
     color: white;
     text-align: center;
-    padding: 3rem 0;
+    padding: 4rem 0; /* Increased padding for better spacing */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .cta h2 {
-    font-size: 2.5rem;
+    font-size: 3rem; /* Increased font size */
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
 .cta p {
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* Slightly larger text for better readability */
     margin-bottom: 2rem;
 }
 
 /* Button Styling */
 .btn-primary,
 .btn-light {
-    padding: 0.8rem 2rem;
+    padding: 1rem 2.5rem; /* Increase padding for better button size */
     border-radius: 30px; /* Rounded button */
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Increased font size */
     transition: background-color 0.3s ease, transform 0.3s ease;
     position: relative;
     z-index: 10; /* Ensure button is above other elements */
@@ -165,7 +167,7 @@
 .hero .btn-primary:hover {
     background-color: #3A8577;
     border-color: #3A8577;
-    transform: translateY(-3px); /* Button lifts on hover */
+    transform: translateY(-3px);
 }
 
 .hero .btn-light {
@@ -185,12 +187,13 @@
     color: inherit;
     
 }
+
 .no-hover:hover {
     color: inherit;
     
 }
 
-/* styles.css */
+/* Contact Form Styles */
 #contact .card {
     background-color: #f8f9fa; /* Light background color for the card */
     border-radius: 12px;
@@ -242,17 +245,80 @@
 }
 
 
+/* Media Queries for Mobile/Tablet Responsiveness */
+@media (max-width: 1200px) {
+    .hero h1 {
+        font-size: 2.5rem; /* Reduced font size for large screens */
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .hero h1 {
+        font-size: 2.2rem; /* Slightly smaller text on medium screens */
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .cta h2 {
+        font-size: 2.5rem;
+    }
+
+    .cta p {
+        font-size: 1.3rem;
+    }
+
+    .container {
+        margin-top: 30px;
+    }
+}
+
 @media (max-width: 767px) {
     .hero {
         background-position: center;
         background-size: cover;
+        padding: 4rem 0;
     }
 
     .cta h2 {
-        font-size: 2rem;
+        font-size: 2rem; /* Smaller heading size for mobile */
     }
 
     .cta p {
+        font-size: 1.2rem;
+    }
+
+    .btn-primary,
+    .btn-light {
+        padding: 0.8rem 2rem;
+        font-size: 1rem; /* Smaller button text on mobile */
+    }
+
+    #contact button {
+        font-size: 14px; /* Smaller button font */
+    }
+
+    #contact input,
+    #contact textarea {
+        font-size: 13px; /* Smaller input and textarea font */
+    }
+
+    .hero .btn {
+        font-size: 1.1rem; /* Button font size adjustment for mobile */
+    }
+}
+
+@media (max-width: 575px) {
+    .hero h1 {
+        font-size: 1.8rem; /* Much smaller text on extra small screens */
+    }
+
+    .hero p {
         font-size: 1rem;
     }
 }

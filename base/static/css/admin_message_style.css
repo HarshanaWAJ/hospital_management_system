@@ -1,0 +1,161 @@
+/* General Card Styles */
+.service-quality-section {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 30px;
+    font-family: 'Arial', sans-serif;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between text and chart */
+    flex-wrap: wrap; /* Allows wrapping for small screens */
+}
+
+/* Text Details */
+.text-details {
+    flex: 1;
+    padding-right: 20px;
+    min-width: 300px; /* Ensure it's not too small */
+}
+
+h2 {
+    text-align: left;
+    font-size: 30px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+h3 {
+    font-size: 24px;
+    margin-top: 25px;
+    color: #444;
+    text-transform: uppercase;
+}
+
+/* Overall Service Quality (colored based on quality) */
+.overall-service-quality {
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 1.2rem;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+.excellent {
+    background-color: #4caf50;
+}
+
+.poor {
+    background-color: #f44336;
+}
+
+.neutral {
+    background-color: #ffa500;
+}
+
+/* Quality Percentages */
+.quality-percentages {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 1.5rem;
+}
+
+.quality-percentages li {
+    margin: 0.8rem 0;
+    font-size: 1.2rem;
+    color: #333;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.quality-percentages li:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+}
+
+.quality-percentages .percentage {
+    font-weight: bold;
+}
+
+.quality-percentages .positive {
+    color: #4caf50;
+}
+
+.quality-percentages .negative {
+    color: #f44336;
+}
+
+.quality-percentages .neutral {
+    color: #ffa500;
+}
+
+/* Net Service Quality */
+.net-service-quality {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 25px;
+    color: #333;
+}
+
+.total-percentage {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Canvas Styling */
+.chart-container {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#serviceQualityChart {
+    width: 60% !important;  /* Reduced chart width by 40% */
+    height: 80% !important;  /* Reduced chart height by 40% */
+    margin-top: 25px;
+    border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .service-quality-section {
+        padding: 1rem;
+        margin: 1rem;
+        flex-direction: column; /* Stack vertically on small screens */
+    }
+
+    .text-details {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    #serviceQualityChart {
+        width: 75%;  /* Further adjust width on small screens */
+        height: 160px; /* Further reduce height */
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .quality-percentages li {
+        font-size: 0.9rem;
+    }
+
+    #serviceQualityChart {
+        width: 80%;  /* Adjust width on very small screens */
+        height: 140px; /* Further optimize for very small screens */
+    }
+}

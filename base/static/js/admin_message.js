@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();  // Prevent the default form submit behavior
 
             const messageId = this.getAttribute('data-id');  // Get the message ID from the data-id attribute
-            console.log(`Message ID: ${messageId}`);  // Check the message ID
 
             // Trigger SweetAlert2 confirmation
             Swal.fire({
@@ -18,29 +17,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (result.isConfirmed) {
                     // Get the CSRF token from the page's cookie or DOM
                     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-                    console.log(`CSRF Token: ${csrfToken}`);  // Check if CSRF is being passed correctly
 
-                    // Forming the URL and logging it for debugging
+                    // Forming the URL and sending a POST request to the backend
                     const url = `/delete-message/${messageId}/`;
-                    console.log(`Sending DELETE request to: ${url}`);
 
                     // Make an AJAX request to delete the message
                     fetch(url, {
-                        method: 'POST',  // Ensure this is a POST request
+                        method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',  // Specify the content type as JSON
                             'X-CSRFToken': csrfToken,  // Include the CSRF token for protection
-                            'X-Requested-With': 'XMLHttpRequest'  // This header indicates that the request is AJAX
+                            'X-Requested-With': 'XMLHttpRequest'  // Indicate that this is an AJAX request
                         }
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);  // Log the response from the server
                         if (data.message === "Success") {
                             // On success, remove the message row from the table
                             document.getElementById(`message-row-${messageId}`).remove();
                             Swal.fire('Deleted!', 'Your message has been deleted.', 'success');
-                            window.location.href = "/admin-message/";
+                            window.location.href = "/admin-message/";  // Redirect to refresh the table
                         } else {
                             Swal.fire('Error!', 'There was an issue deleting the message.', 'error');
                         }
@@ -53,3 +49,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+

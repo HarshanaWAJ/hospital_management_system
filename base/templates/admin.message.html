@@ -1,8 +1,48 @@
 {% extends 'main.html' %}
 {% load static %}
-{% block title %}Welcome to the Hospital Management System{% endblock %}
+{% block title %}Admin Messages - Hospital Management System{% endblock %}
 
 {% block content %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="service-quality-section">
+            <div class="service-details">
+                <div class="text-details">
+                    <h2>Overall Service Quality</h2>
+                    <div class="overall-service-quality
+                        {% if overall_service_quality == 'Excellent' %}excellent{% endif %}
+                        {% if overall_service_quality == 'Poor' %}poor{% endif %}
+                        {% if overall_service_quality == 'Neutral' %}neutral{% endif %}">
+                        {{ overall_service_quality }}
+                    </div>
+                    
+                    <h3>Service Quality Percentages:</h3>
+                    <ul class="quality-percentages">
+                        <li><strong>Positive:</strong> <span class="percentage positive">{{ positive_percentage|floatformat:2 }}%</span></li>
+                        <li><strong>Negative:</strong> <span class="percentage negative">{{ negative_percentage|floatformat:2 }}%</span></li>
+                        <li><strong>Neutral:</strong> <span class="percentage neutral">{{ neutral_percentage|floatformat:2 }}%</span></li>
+                    </ul>
+
+                    <h3>Net Service Quality:</h3>
+                    <div class="net-service-quality">
+                        <strong>Total Quality Percentage:</strong> <span class="total-percentage">{{ total_service_quality_percentage|floatformat:2 }}%</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Pass data to JavaScript using data attributes -->
+            <div class="chart-container">
+                <canvas id="serviceQualityChart" data-positive="{{ positive_percentage }}" 
+                        data-negative="{{ negative_percentage }}" 
+                        data-neutral="{{ neutral_percentage }}"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<hr>
 
 <h1 class="text-center mb-4" style="color: #3A9D6F;">Admin Messages</h1>
 
@@ -14,21 +54,30 @@
             <th>Name</th>
             <th>Email Address</th>
             <th>Message</th>
+            <th>Sentiment</th>
+            <th>Is Question?</th>
+            <th>Service Quality</th>
             <th>Operations</th>
         </tr>
     </thead>
     <tbody>
-        {% for message in admin_messages %}
-            <tr id="message-row-{{ message.id }}">
-                <td>{{ message.id }}</td>
-                <td>{{ message.name }}</td>
-                <td>{{ message.email }}</td>
-                <td>{{ message.message }}</td>
+        {% for entry in admin_messages %}
+            <tr id="message-row-{{ entry.message.id }}" 
+                {% if entry.sentiment == 'negative' %} style="background-color: #f8d7da;" {% endif %}
+                {% if entry.sentiment == 'positive' %} style="background-color: #d4edda;" {% endif %}
+                {% if entry.sentiment == 'neutral' %} style="background-color: #fff3cd;" {% endif %}>
+                <td>{{ entry.message.id }}</td>
+                <td>{{ entry.message.name }}</td>
+                <td>{{ entry.message.email }}</td>
+                <td>{{ entry.message.message }}</td>
+                <td>{{ entry.sentiment|capfirst }}</td>
+                <td>{% if entry.is_question %}Yes{% else %}No{% endif %}</td>
+                <td>{{ entry.service_quality }}</td>
                 <td>
                     <form action="" method="post">
                         {% csrf_token %}
                         <!-- Delete Button with Font Awesome Icon -->
-                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ message.id }}">
+                        <button class="btn btn-danger btn-sm delete-btn" data-id="{{ entry.message.id }}">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </form>
@@ -36,7 +85,7 @@
             </tr>
         {% empty %}
             <tr>
-                <td colspan="5" class="text-center">No messages available.</td>
+                <td colspan="8" class="text-center">No messages available.</td>
             </tr>
         {% endfor %}
     </tbody>
@@ -45,5 +94,8 @@
 <!-- Add SweetAlert2 CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{% static 'js/admin_message.js' %}"></script>
+<script src="{% static 'js/message_analyze_charts.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/admin_message_style.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 {% endblock %}

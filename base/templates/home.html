@@ -4,13 +4,27 @@
 
 {% block content %}
     <!-- Landing Page Section -->
-    <section class="hero text-center py-5" id="hero">
+    <section class="hero text-center py-5" id="hero" style="background-image: url('{% static 'images/banner.png' %}');">
         <div class="container">
-            <h1 class="display-4">Welcome to the Hospital Management System</h1>
-            <p class="lead">Efficiently manage patient records, appointments, and hospital services.</p>
-            <a href="#services" class="btn btn-primary btn-lg">Explore Our Services</a>
+            <div class="row align-items-center">
+                <!-- Right Side: Additional Details -->
+                <div class="col-lg-6">
+                </div>
+                <!-- Left Side: Text and Call to Action -->
+                <div class="col-lg-6">
+                    <h1 class="display-4">Manage Your Health with Ease</h1>
+                    <p class="lead">Our hospital management system allows patients and healthcare providers to stay connected, 
+                        ensuring smooth operations for patient care, appointments, and medical services.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#services" class="btn btn-primary btn-lg">Our Services</a>
+                        <a href="#make-appointment" class="btn btn-primary btn-lg">Make an Appointment</a> <!-- New Appointment Button -->
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    
 
     <!-- About Section -->
     <section class="about py-5" id="about">
