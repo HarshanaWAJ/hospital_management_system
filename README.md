@@ -28,11 +28,10 @@ As the **full-stack developer and solution architect**, I was responsible for th
 
 ## Technologies Used
 
-- **Frontend**: React, JavaScript, HTML5, CSS3
-- **Backend**: Django (Python), REST APIs
+- **Frontend**: JavaScript, HTML5, CSS3, Boostrap
+- **Backend**: Django (Python)
 - **AI/ML**: TensorFlow, Scikit-Learn, Natural Language Processing (NLP), Sentiment Analysis
-- **Database**: PostgreSQL, SQL
-- **Cloud**: AWS (EC2, RDS, S3)
+- **Database**: SQLlite, SQL
 - **Other**: Docker (for containerization), Git (version control)
 
 ## Installation
