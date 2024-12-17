@@ -127,7 +127,8 @@ STATIC_URL = 'static/'
 # Optionally add STATICFILES_DIRS if your static files are in custom locations
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    os.path.join(BASE_DIR, 'base/static')
+    os.path.join(BASE_DIR, 'base/static'),
+    os.path.join(BASE_DIR, 'appoinments/static')
 ]
 
 # Default primary key field type

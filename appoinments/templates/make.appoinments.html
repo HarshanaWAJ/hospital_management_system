@@ -4,6 +4,112 @@
 
 {% block content %}
 <section>
-    <h3>This is appoinment Section</h3>
+    <h3>Appointment Form</h3>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <!-- Form Container for Layout -->
+        <div class="form-container">
+        
+            <!-- First Row: Patient Information and Appointment Information -->
+            <div class="form-row">
+                <fieldset class="form-section">
+                    <legend>Patient Information</legend>
+                    <div>
+                        <label for="{{ appointments_form.patient_name.id_for_label }}">Patient Name:</label>
+                        {{ appointments_form.patient_name }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.date_of_birth.id_for_label }}">Date of Birth:</label>
+                        {{ appointments_form.date_of_birth }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.gender.id_for_label }}">Gender:</label>
+                        {{ appointments_form.gender }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.phone_number.id_for_label }}">Phone Number:</label>
+                        {{ appointments_form.phone_number }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.email_address.id_for_label }}">Email Address:</label>
+                        {{ appointments_form.email_address }}
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-section">
+                    <legend>Appointment Information</legend>
+                    <div>
+                        <label for="{{ appointments_form.appointment_date.id_for_label }}">Appointment Date:</label>
+                        {{ appointments_form.appointment_date }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.department.id_for_label }}">Department:</label>
+                        {{ appointments_form.department }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.reason_for_appointment.id_for_label }}">Reason for Appointment:</label>
+                        {{ appointments_form.reason_for_appointment }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.appointment_type.id_for_label }}">Appointment Type:</label>
+                        {{ appointments_form.appointment_type }}
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Second Row: Medical Information and Emergency Contact -->
+            <div class="form-row">
+                <fieldset class="form-section">
+                    <legend>Medical Information</legend>
+                    <div>
+                        <label for="{{ appointments_form.symptoms.id_for_label }}">Symptoms:</label>
+                        {{ appointments_form.symptoms }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.medical_history.id_for_label }}">Medical History:</label>
+                        {{ appointments_form.medical_history }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.referring_doctor.id_for_label }}">Referring Doctor:</label>
+                        {{ appointments_form.referring_doctor }}
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-section">
+                    <legend>Emergency Contact</legend>
+                    <div>
+                        <label for="{{ appointments_form.emergency_contact_name.id_for_label }}">Emergency Contact Name:</label>
+                        {{ appointments_form.emergency_contact_name }}
+                    </div>
+                    <div>
+                        <label for="{{ appointments_form.emergency_contact_phone.id_for_label }}">Emergency Contact Phone:</label>
+                        {{ appointments_form.emergency_contact_phone }}
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Third Row: Consent and Agreement -->
+            <fieldset class="form-section full-width">
+                <legend>Consent and Agreement</legend>
+                <div>
+                    <label for="{{ appointments_form.consent_for_treatment.id_for_label }}">Consent for Treatment:</label>
+                    {{ appointments_form.consent_for_treatment }}
+                </div>
+                <div>
+                    <label for="{{ appointments_form.data_privacy_agreement.id_for_label }}">Data Privacy Agreement:</label>
+                    {{ appointments_form.data_privacy_agreement }}
+                </div>
+            </fieldset>
+            
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
 </section>
+
+<!-- Link to CSS -->
+<link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+
 {% endblock %}

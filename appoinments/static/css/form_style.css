@@ -1,0 +1,161 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Section */
+section {
+    width: 80%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Form Heading */
+h3 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form Container and Row Setup */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.form-section {
+    flex: 1;
+    min-width: 45%; /* Ensure columns take up equal width */
+}
+
+.full-width {
+    display: flex;
+    width: 100%;
+    text-align: left;
+    align-items: flex-start;
+}
+
+.checkbox-group {
+    display: block; /* Ensure checkboxes are displayed as block elements */
+}
+
+input[type="checkbox"] {
+    display: inline-block; /* Makes checkboxes inline with text */
+    margin-left: 0; /* Ensures no additional indentation */
+}
+
+
+
+/* Fieldset Styles */
+fieldset {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding: 0 10px;
+    top: -10px;
+}
+
+/* Form Field Styles */
+div {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 16px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Fix for Left-Aligning Checkboxes in Consent and Agreement */
+fieldset .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="checkbox"] {
+    margin-left: 0;
+    align-self: flex-start; /* Ensures checkboxes are aligned to the left */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    section {
+        width: 95%;
+        padding: 10px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-section {
+        min-width: 100%;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input, select, textarea {
+        font-size: 14px;
+    }
+}
