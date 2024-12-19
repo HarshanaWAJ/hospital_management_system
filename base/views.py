@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 
 from .utils.analyze_message_util import analyze_sentiment, is_question, calculate_service_quality
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -38,8 +39,7 @@ def home(request):
 def delete_message(request, message_id):
     if request.method == 'POST' and request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         # Try to get the message by ID and delete it
-        message = get_object_or_404(Message, id=message_id)
-        
+        message = get_object_or_404(Message, id=message_id)     
         try:
             message.delete()
             return JsonResponse({'message': 'Success'}, status=200)
@@ -54,8 +54,23 @@ def login(request):
     return render(request, 'login.html')
 
 # Register
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .register_form import UserRegisterForm
+
 def register(request):
-    return render(request, 'register.html')
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been created!')
+            return redirect('login')  # Redirect after successful registration
+        else:
+            messages.error(request, 'Please fix the errors below.')
+    else:
+        form = UserRegisterForm()
+
+    return render(request, 'register.html', {'register_form': form})
 
 
 

@@ -1,13 +1,31 @@
 from django.db import models
 
 class Appointment(models.Model):
+    GENDER_CHOICES = [
+        ('', 'Select One'),  # Disabled default option
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    ]
+
+    DEPARTMENT_CHOICES = [
+        ('', 'Select One'),  # Disabled default option
+        ('OPD', 'OPD'),
+        ('Cardiology', 'Cardiology'),
+        ('Dermatology', 'Dermatology'),
+        ('Neurology', 'Neurology'),
+        ('Orthopedics', 'Orthopedics'),
+        ('Pediatrics', 'Pediatrics'),
+        ('Other', 'Other'),
+        # Add other departments here
+    ]
+
     patient_name = models.CharField(max_length=200)
     date_of_birth = models.DateField()
-    gender = models.CharField(max_length=10)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     phone_number = models.CharField(max_length=15)
     email_address = models.EmailField(blank=True, null=True)
     appointment_date = models.DateTimeField()
-    department = models.CharField(max_length=100)
+    department = models.CharField(max_length=100, choices=DEPARTMENT_CHOICES)
     reason_for_appointment = models.TextField()
     appointment_type = models.CharField(max_length=50, choices=[('Consultation', 'Consultation'), ('Follow-up', 'Follow-up'), ('Emergency', 'Emergency')])
     symptoms = models.TextField(blank=True, null=True)
