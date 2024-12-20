@@ -3,42 +3,46 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
 class UserRegisterForm(UserCreationForm):
+    # Additional fields for registration
+    title = forms.ChoiceField(
+        required=False,
+        choices=[('Mr', 'Mr'), ('Mrs', 'Mrs'), ('Miss', 'Miss')],
+        widget=forms.Select(attrs={'class': 'form-control form-control-lg'})
+    )
     
+    gender = forms.ChoiceField(
+        required=False,
+        choices=[('Male', 'Male'), ('Female', 'Female')],
+        widget=forms.Select(attrs={'class': 'form-control form-control-lg'})
+    )
+
+    # Custom fields to override the default UserCreationForm fields
     dob = forms.DateField(
-    required=False,
-    widget=forms.DateInput(
-        format='%Y-%m-%d',  # Use this format to match the expected input format for the HTML date input
-        attrs={'type': 'date', 'class': 'form-control'}  # 'type': 'date' ensures it uses the HTML5 date picker
+        required=False,
+        widget=forms.DateInput(
+            format='%Y-%m-%d', 
+            attrs={'type': 'date', 'class': 'form-control'}
         )
     )
-    first_name = forms.CharField(max_length=200, required=True, widget=forms.TextInput())
-    last_name = forms.CharField(max_length=200, required=True, widget=forms.TextInput())
-    street_address = forms.CharField(max_length=200, required=True, widget=forms.TextInput())
-    street_name = forms.CharField(max_length=200, required=True, widget=forms.TextInput())
-    postal_code = forms.CharField(max_length=200, required=True, widget=forms.TextInput())
-    town = forms.CharField(max_length=200, required=True, widget=forms.TextInput())
-    contact_no = forms.CharField(max_length=200, required=True, widget=forms.TextInput())
-    emergency_contact_no = forms.CharField(max_length=200, required=True, widget=forms.TextInput())
-    # Password fields
-    password1 = forms.CharField(max_length=200, required=True, widget=forms.PasswordInput())
-    password2 = forms.CharField(max_length=200, required=True, widget=forms.PasswordInput())
+    street_address = forms.CharField(max_length=200, required=False, widget=forms.TextInput())
+    street_name = forms.CharField(max_length=200, required=False, widget=forms.TextInput())
+    postal_code = forms.CharField(max_length=200, required=False, widget=forms.TextInput())
+    town = forms.CharField(max_length=200, required=False, widget=forms.TextInput())
+    contact_no = forms.CharField(max_length=200, required=False, widget=forms.TextInput())
+    country = forms.CharField(max_length=200, initial='Sri Lanka', disabled=True)
+    emergency_contact_no = forms.CharField(max_length=200, required=False, widget=forms.TextInput())
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name', 'title', 'gender', 
-                  'dob', 'street_address', 'street_name', 'postal_code', 'town', 'country', 'contact_no', 
-                  'emergency_contact_no']
+        fields = ['username', 'email', 'title', 'gender', 'first_name', 'last_name', 'dob', 
+                  'street_address', 'street_name', 'postal_code', 'town', 'contact_no', 
+                  'emergency_contact_no']  
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
         # Apply form control class to all fields
         for field in self.fields.values():
             field.widget.attrs.update({'class': 'form-control form-control-lg'})
-
-    # Custom validation for password1
-    def clean_password1(self):
-        password1 = self.cleaned_data.get('password1')
-        return password1
 
     # Custom validation for email to check duplicate email
     def clean_email(self):

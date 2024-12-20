@@ -141,3 +141,12 @@ DEBUG = True
 
 CSRF_COOKIE_HTTPONLY = False  # This allows access to the CSRF cookie from JavaScript
 CSRF_COOKIE_SECURE = False    # If running locally, set this to False (it should be True in production with HTTPS)
+
+
+# Example email backend configuration for development
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # This is the default backend
+EMAIL_HOST = 'smtp.gmail.com'  # Or your own email provider
+EMAIL_PORT = 587  # Typically 587 for TLS
+EMAIL_USE_TLS = True  # Enable TLS for secure email sending
+EMAIL_HOST_USER = 'developmentmail2024@gmail.com'
+EMAIL_HOST_PASSWORD = 'aeas xvsk vtqy bxtn'

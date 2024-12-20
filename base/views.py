@@ -1,15 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Message
 from .contact_form import MessageForm
-from django.urls import reverse
 from django.http import JsonResponse
 
 from .utils.analyze_message_util import analyze_sentiment, is_question, calculate_service_quality
-from django.views.decorators.csrf import csrf_exempt
+
+# Register
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .register_form import UserRegisterForm
+
+# Send Mail
+from django.core.mail import send_mail
+
+from django.contrib.auth import authenticate, login
 
 
-
-# Create views here.
+# Views
 
 #Home with Contact Form
 def home(request):
@@ -50,19 +57,44 @@ def delete_message(request, message_id):
 
 
 # Login
-def login(request):
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        # Authenticate user
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+
+            # Get User Details
+            user_details = {
+                'is_user': user.is_user,
+                'is_admin': user.is_admin,
+                'is_staff': user.is_staff,
+                'is_doctor': user.is_doctor
+            }
+            print(user_details)
+            login(request, user)
+            return redirect('user_dashboard') 
+            # Redirect to the user dashboard after successful login
+            
+        else:
+            messages.error(request, "Invalid email or password")
+
     return render(request, 'login.html')
 
-# Register
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .register_form import UserRegisterForm
+
 
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
+        if form.is_valid(): # Check form validity
+            user = form.save()  # Save the user with the custom fields
+            # Send account creation success email
+            send_account_creation_email(user)
+
             messages.success(request, 'Your account has been created!')
             return redirect('login')  # Redirect after successful registration
         else:
@@ -71,7 +103,6 @@ def register(request):
         form = UserRegisterForm()
 
     return render(request, 'register.html', {'register_form': form})
-
 
 
 # Admin Messages    
@@ -144,3 +175,42 @@ def admin_message(request):
 
     return render(request, 'admin.message.html', context)
 
+# UserDashboard View
+def user_dashboard(request):
+    return render(request, 'user_dashboard.html') 
+
+# --------------------------------------------------------------------------------------------------------------
+# Account Registration Mail Sending
+def send_account_creation_email(user):
+    # Logging user information for debugging (you might remove this in production)
+    print(user)
+    
+    # Define subject and message
+    subject = 'Welcome to Carebridge - Account Successfully Created'
+    
+    message = f"""
+    Dear {user.username},
+    
+    We are pleased to inform you that your account has been successfully created on the Carebridge platform. 
+    
+    You can now log in using your credentials and start exploring the features we offer. If you encounter any issues or have questions, our support team is available to assist you.
+
+    Thank you for choosing Carebridge. We look forward to serving you and hope you have a great experience.
+
+    Best regards,
+    The Carebridge Team
+    Support: support@carebridge.com
+    Website: www.carebridge.com
+    """
+    
+    # Send the email using Django's send_mail function
+    send_mail(
+        subject,
+        message,
+        'developmentmail2024@gmail.com',  # Sender's email address
+        [user.email],  # Recipient's email address
+        fail_silently=False,
+    )
+
+    
+# ------------------------------------------------------------------------------------------------------------------------------------
