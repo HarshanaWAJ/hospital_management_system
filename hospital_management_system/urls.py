@@ -12,4 +12,6 @@ urlpatterns = [
 
     #Doctor
     path('doctor/', include('doctors.urls')),
+    path('admins/', include('admins.urls')),
+    path('staff/', include('staff.urls')),
 ]

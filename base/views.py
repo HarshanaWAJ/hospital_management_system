@@ -77,9 +77,17 @@ def login_view(request):
             }
             print(user_details)
             login(request, user)
-            return redirect('user_dashboard') 
-            # Redirect to the user dashboard after successful login
-            
+
+            if (user.is_user):
+                return redirect('user_dashboard') 
+            elif (user.is_admin):
+                return redirect('admin_dashboard')
+            elif (user.is_staff):
+                return redirect('staff_dashboard')
+            elif (user.is_doctor):
+                return redirect('doctor_dashboard')
+            else:
+                messages.error(request, "No Authorities")
         else:
             messages.error(request, "Invalid email or password")
 
@@ -174,10 +182,22 @@ def admin_message(request):
     }
 
     return render(request, 'admin.message.html', context)
-
+# Dashboards
 # UserDashboard View
 def user_dashboard(request):
     return render(request, 'user_dashboard.html') 
+
+# AdminDashboard View
+def admin_dashboard(request):
+    return render(request, 'admin.dashboard.html') 
+
+# DoctorDashboard View
+def doctor_dashboard(request):
+    return render(request, 'doctor.dashboard.html') 
+
+# StaffDashboard View
+def staff_dashboard(request):
+    return render(request, 'staff.dashboard.html') 
 
 # --------------------------------------------------------------------------------------------------------------
 # Account Registration Mail Sending

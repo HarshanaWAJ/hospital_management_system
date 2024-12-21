@@ -1,6 +1,9 @@
 from base.models import User
 
 class SiteAdmin(User):
+
+    exclude = ['date_joined']
+    
     # Override the save method to set is_user and is_doctor fields
     def save(self, *args, **kwargs):
         self.is_user = False  # Set is_user to False for Admin

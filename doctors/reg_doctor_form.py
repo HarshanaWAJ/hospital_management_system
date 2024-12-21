@@ -6,7 +6,7 @@ class DoctorForm(forms.ModelForm):
         required=False,
         widget=forms.DateInput(
             format='%Y-%m-%d',
-            attrs={'type': 'date', 'class': 'form-control'}
+            attrs={'type': 'date', 'class': 'form-control form-control-lg'}
         )
     )
 
@@ -22,20 +22,6 @@ class DoctorForm(forms.ModelForm):
             'contact_no', 'emergency_contact_no', 'degree','specialty', 'years_of_experience', 'license_number',
             'position'
         ]
-
-    def __init__(self, *args, **kwargs):
-        super(DoctorForm, self).__init__(*args, **kwargs)
-        
-        for field in self.fields.values():
-            field.widget.attrs.update({
-                'class': 'form-control form-control-lg',
-                'placeholder': field.label
-            })
-
-            if isinstance(field.widget, forms.DateInput):
-                field.widget.attrs.update({'type': 'date'})
-            elif isinstance(field.widget, forms.Select):
-                field.widget.attrs.update({'class': 'form-select'})
 
     def save(self, commit=True):
         # Ensure password is hashed before saving

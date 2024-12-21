@@ -12,6 +12,12 @@ urlpatterns = [
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+
+    # Dashboard URLS
     path('user_dashboard/', views.user_dashboard, name='user_dashboard'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('doctor_dashboard/', views.doctor_dashboard, name='doctor_dashboard'),
+    path('staff_dashboard/', views.staff_dashboard, name='staff_dashboard'),
 ]
