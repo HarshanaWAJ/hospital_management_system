@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # Custom Apps Registration
     'base',
     'appoinments',
+    'doctors',
+    'admins',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +129,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     os.path.join(BASE_DIR, 'base/static'),
-    os.path.join(BASE_DIR, 'appoinments/static')
+    os.path.join(BASE_DIR, 'appoinments/static'),
+    os.path.join(BASE_DIR, 'doctors/static'),
+    os.path.join(BASE_DIR, 'admins/static'),
 ]
 
 # Default primary key field type

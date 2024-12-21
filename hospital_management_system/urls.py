@@ -8,5 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
     path('appointments/', include('appoinments.urls')),
-     path('logout/', auth_views.LogoutView.as_view(next_page='/login/'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/login/'), name='logout'),
+
+    #Doctor
+    path('doctor/', include('doctors.urls')),
 ]
