@@ -4,6 +4,9 @@
 
 {% block content %}
     <div class="admin_dashboard">
-        Admin Dashboard
+        <div class="col-md-3">
+            {% include 'admin.sidebar.html' %}
+        </div>
     </div>
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
 {% endblock %}

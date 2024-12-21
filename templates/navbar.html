@@ -27,6 +27,18 @@
                             Welcome, {{ request.user.username }}
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <!-- Conditional Dashboard Navigation -->
+                            {% if request.user.is_user %}
+                                <li><a class="dropdown-item" href="{% url 'user_dashboard' %}">User Dashboard</a></li>
+                            {% elif request.user.is_admin %}
+                                <li><a class="dropdown-item" href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+                            {% elif request.user.is_doctor %}
+                                <li><a class="dropdown-item" href="{% url 'doctor_dashboard' %}">Doctor Dashboard</a></li>
+                            {% elif request.user.is_staff %}
+                                <li><a class="dropdown-item" href="{% url 'staff_dashboard' %}">Staff Dashboard</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="#">Dashboard</a></li> <!-- Fallback -->
+                            {% endif %}
                             <!-- Settings Option -->
                             <li>
                                 <a class="dropdown-item" href="#">Settings</a>
@@ -45,8 +57,6 @@
                         <a class="nav-link" href="/login" role="button">Login</a>
                     </li>
                 {% endif %}
-
-
             </ul>
         </div>
     </div>

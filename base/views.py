@@ -14,6 +14,7 @@ from .register_form import UserRegisterForm
 from django.core.mail import send_mail
 
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 
 # Views
@@ -184,18 +185,22 @@ def admin_message(request):
     return render(request, 'admin.message.html', context)
 # Dashboards
 # UserDashboard View
+@login_required
 def user_dashboard(request):
     return render(request, 'user_dashboard.html') 
 
 # AdminDashboard View
+@login_required
 def admin_dashboard(request):
     return render(request, 'admin.dashboard.html') 
 
 # DoctorDashboard View
+@login_required
 def doctor_dashboard(request):
     return render(request, 'doctor.dashboard.html') 
 
 # StaffDashboard View
+@login_required
 def staff_dashboard(request):
     return render(request, 'staff.dashboard.html') 
 

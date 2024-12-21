@@ -3,9 +3,13 @@
 {% block title %}Admin Messages - Hospital Management System{% endblock %}
 
 {% block content %}
-
 <div class="row">
     <div class="col-12">
+        <div class="row">
+            <div class="col-md-3">
+                {% include 'admin.sidebar.html' %}
+            </div>
+        </div>
         <div class="service-quality-section">
             <div class="service-details">
                 <div class="text-details">
@@ -97,5 +101,7 @@
 <script src="{% static 'js/message_analyze_charts.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/admin_message_style.css' %}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
 
 {% endblock %}
