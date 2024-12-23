@@ -1,4 +1,6 @@
 from django.db import models
+from base.models import User
+from doctors.models import Doctor
 
 class Appointment(models.Model):
     GENDER_CHOICES = [
@@ -30,7 +32,6 @@ class Appointment(models.Model):
     appointment_type = models.CharField(max_length=50, choices=[('Consultation', 'Consultation'), ('Follow-up', 'Follow-up'), ('Emergency', 'Emergency')])
     symptoms = models.TextField(blank=True, null=True)
     medical_history = models.TextField(blank=True, null=True)
-    referring_doctor = models.CharField(max_length=100, blank=True, null=True)
     insurance_provider = models.CharField(max_length=100, blank=True, null=True)
     policy_number = models.CharField(max_length=100, blank=True, null=True)
     emergency_contact_name = models.CharField(max_length=200, blank=True, null=True)
@@ -39,6 +40,11 @@ class Appointment(models.Model):
     special_requirements = models.TextField(blank=True, null=True)
     consent_for_treatment = models.BooleanField(default=False)
     data_privacy_agreement = models.BooleanField(default=False)
+    status = models.CharField(max_length=50, choices=[('Pending', 'Pending'), ('Confirmed', 'Confirmed'), ('Cancelled', 'Cancelled')], default='Pending')
+    
+    # Forign IDs
+    referring_doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, related_name='appointments_as_referring_doctor')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='appointments_as_user')
 
     def __str__(self):
         return f"Appointment for {self.patient_name} on {self.appointment_date.strftime('%Y-%m-%d %H:%M:%S')}"

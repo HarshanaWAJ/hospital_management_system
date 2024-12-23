@@ -4,6 +4,32 @@
 
 {% block content %}
     <div class="user_dashboard">
-        User Dashboard
+        <div class="welcome_card">
+            <!-- Profile icon and text on the same line -->
+            <div class="profile_info">
+                <div class="profile_icon">
+                    <i class="fas fa-user-circle"></i> <!-- Font Awesome user circle icon -->
+                </div>
+                <div class="welcome_text">
+                    <h2>Hello, {{ user.first_name }} {{ user.last_name }}</h2>
+                    <p>Welcome back to your dashboard.</p>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="options">
+                <a href="{% url 'create_appointment' %}" class="btn">
+                    <i class="fas fa-calendar-plus"></i> Make Appointment
+                </a>
+            </div>
+            <div class="options">
+                <a href="{% url 'my_appointments' %}" class="btn">
+                    <i class="fas fa-clipboard-list"></i> My Appointment
+                </a>
+            </div>
+        </div>
     </div>
+    <!-- Link to Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock %}

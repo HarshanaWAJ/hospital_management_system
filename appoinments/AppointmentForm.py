@@ -7,7 +7,6 @@ class AppointmentForm(forms.ModelForm):
         fields = '__all__'
 
     # Customizing widgets for specific fields
-
     # Date of Birth - Use 'date' type widget
     date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     

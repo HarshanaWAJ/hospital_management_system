@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}My Appointments{% endblock %}
+
+{% block content %}
+<section>
+    <h3>Your Appointments</h3>
+    
+    {% if appointments %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Appointment Date</th>
+                    <th>Department</th>
+                    <th>Reason for Appointment</th>
+                    <th>Phone Number</th>
+                    <td>Date and Time</td>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.appointment_date|date:"F j, Y, H:i" }}</td>
+                        <td>{{ appointment.department }}</td>
+                        <td>{{ appointment.reason_for_appointment }}</td>
+                        <td>{{ appointment.phone_number }}</td>
+                        <td>{{ appointment.appointment_date }}</td>
+                        <td>
+                            {% if appointment.is_confirmed %}
+                                <span style="color: green;">Confirmed</span>
+                            {% else %}
+                                <span style="color: red;">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="#" class="cancel-btn">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You don't have any appointments yet.</p>
+    {% endif %}
+</section>
+<link rel="stylesheet" href="{% static 'css/table_style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}

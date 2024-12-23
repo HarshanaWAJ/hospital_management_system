@@ -1,0 +1,109 @@
+/* Styling for the appointments page */
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f4f4;
+    color: #555;
+    font-weight: bold;
+}
+
+table td {
+    background-color: #fff;
+    color: #666;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+span {
+    font-weight: bold;
+}
+
+span[style="color: green;"] {
+    color: green;
+}
+
+span[style="color: red;"] {
+    color: red;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Optional: Add responsiveness */
+@media (max-width: 768px) {
+    table th, table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    section {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+/* Cancel button styling */
+.cancel-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #dc3545; /* Red background */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.cancel-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+    text-decoration: none;
+    color: #fff;
+}
+
+.cancel-btn i {
+    margin-right: 8px; /* Space between the icon and text */
+    text-decoration: none;
+    color: #fff;
+}

@@ -1,0 +1,81 @@
+/* General styling for the user dashboard */
+.user_dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Styling for the welcome card */
+.welcome_card {
+    background-color: #ffffff; /* White background for card */
+    color: #4C9A8B; /* Soft teal text */
+    border-radius: 12px; /* Rounded corners */
+    padding: 2rem;
+    font-size: 1.25rem; /* Adjust font size */
+    font-weight: bold;
+    text-align: left; /* Align text to the left */
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  */
+    width: 100%;
+    max-width: 500px; /* Maximum width for the card */
+    margin: 1rem 0; /* Space around the card */
+}
+
+/* Profile info container to align icon and text */
+.profile_info {
+    display: flex; /* Use flexbox to align the icon and text on the same line */
+    align-items: center; /* Vertically center the icon and text */
+}
+
+/* Profile icon styling */
+.profile_icon {
+    font-size: 3rem; /* Adjust size of the profile icon */
+    color: #4C9A8B; /* Icon color */
+    margin-right: 1.5rem; /* Space between icon and text */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Styling for the text in the card */
+.welcome_text h2 {
+    font-size: 1.75rem; /* Slightly larger font size for the user's name */
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.welcome_text p {
+    font-size: 1.1rem; /* Smaller text for the greeting */
+    margin-top: 0.5rem;
+}
+
+/* Button Styling */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #3A9D6F;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect */
+.btn:hover {
+    background-color: #2A7F57;
+    color: whitesmoke;
+}
+
+/* Icon Styling */
+.btn i {
+    margin-right: 8px; /* Adds space between the icon and the text */
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

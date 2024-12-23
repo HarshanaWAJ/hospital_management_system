@@ -11,11 +11,14 @@
         
         <!-- Form Container for Layout -->
         <div class="form-container">
-        
             <!-- First Row: Patient Information and Appointment Information -->
             <div class="form-row">
                 <fieldset class="form-section">
                     <legend>Patient Information</legend>
+                    <!-- User that in Logged in -->
+                        <div style="display:none;">
+                            {{ appointments_form.user }}
+                        </div>
                     <div>
                         <label for="{{ appointments_form.patient_name.id_for_label }}">Patient Name:</label>
                         {{ appointments_form.patient_name }}
