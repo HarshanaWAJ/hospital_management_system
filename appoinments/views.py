@@ -34,7 +34,7 @@ def user_view_appointments(request):
     print(appointments)
     return render(request, 'user.appointments.html', {'appointments': appointments})
 
-def doctor_view_appointments(request):
+def doctor_view_pending_appointments(request):
     appointments = Appointment.objects.filter(referring_doctor=request.user)
     print(appointments)
     return render(request, 'doctor.appointments.html', {'appointments': appointments})

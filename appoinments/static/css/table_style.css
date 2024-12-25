@@ -107,3 +107,30 @@ p {
     text-decoration: none;
     color: #fff;
 }
+
+.accept-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #1ad609; /* green background */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.accept-btn:hover {
+    background-color: #15aa08; /* Darker green on hover */
+    text-decoration: none;
+    color: #fff;
+}
+
+.accept-btn i {
+    margin-right: 8px; /* Space between the icon and text */
+    text-decoration: none;
+    color: #fff;
+}
