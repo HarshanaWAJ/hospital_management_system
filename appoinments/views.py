@@ -65,15 +65,18 @@ def delete_appointment(request, id):
 
 
 def doctor_view_pending_appointments(request):
-    pending_appointments = Appointment.objects.filter(referring_doctor=request.user, status = 'Pending')
+    # Query for pending, accepted, and cancelled appointments
+    pending_appointments = Appointment.objects.filter(referring_doctor=request.user, status='Pending')
     accepted_appointments = Appointment.objects.filter(referring_doctor=request.user.id, status='Confirmed')
-    print(accepted_appointments)
     cancelled_appointments = Appointment.objects.filter(referring_doctor=request.user.id, status='Cancelled')
+    
+    # Render the template and pass the context variables
     return render(request, 'doctor.appointments.html', {
         'pending_appointments': pending_appointments,
         'accepted_appointments': accepted_appointments,
         'cancelled_appointments': cancelled_appointments
-        })
+    })
+
 
 @csrf_exempt
 def accept_reject_appointment(request, id, action):

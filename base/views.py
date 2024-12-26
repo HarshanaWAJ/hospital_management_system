@@ -195,9 +195,14 @@ def admin_dashboard(request):
     return render(request, 'admin.dashboard.html') 
 
 # DoctorDashboard View
+from appoinments.models import Appointment
 @login_required
 def doctor_dashboard(request):
-    return render(request, 'doctor.dashboard.html') 
+    total_appointment_count = Appointment.objects.count()  # Get the total appointment count
+    print(total_appointment_count)
+    return render(request, 'doctor.dashboard.html', {
+        'total_appointment_count': total_appointment_count
+    }) 
 
 # StaffDashboard View
 @login_required

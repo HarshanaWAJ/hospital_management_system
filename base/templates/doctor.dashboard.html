@@ -3,7 +3,7 @@
 {% block title %}Welcome to the Hospital Management System{% endblock %}
 
 {% block content %}
-    <div class="doctorr_dashboard">
+    <div class="doctor_dashboard">
         <div class="welcome_card">
             <!-- Profile icon and text on the same line -->
             <div class="profile_info">
@@ -13,6 +13,16 @@
                 <div class="welcome_text">
                     <h2>Hello, {{ user.first_name }} {{ user.last_name }}</h2>
                     <p>Welcome back to your dashboard.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-5">
+            <div class="card-header">
+                <h3>Total Appointments</h3>
+            </div>
+            <div class="card-body">
+                <div class="appointment-count">
+                    <p>{{ total_appointment_count }}</p>
                 </div>
             </div>
         </div>
