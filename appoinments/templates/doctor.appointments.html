@@ -4,9 +4,9 @@
 
 {% block content %}
 <section>
-    <h3>Appointments</h3>
+    <h3>Pending Appointments</h3>
     
-    {% if appointments %}
+    {% if pending_appointments %}
         <table>
             <thead>
                 <tr>
@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for appointment in appointments %}
+                {% for appointment in pending_appointments %}
                     <tr>
                         <td>{{ appointment.appointment_date|date:"F j, Y, H:i" }}</td>
                         <td>{{ appointment.department }}</td>
@@ -32,14 +32,88 @@
                                 <span style="color: red;">Pending</span>
                             {% endif %}
                         </td>
+                        <form>
+                            {% csrf_token %}
+                            <td>
+                                <a href="#" class="accept-btn" data-id="{{ appointment.id }}">
+                                    <i class="fas fa-check"></i> Accept
+                                </a>
+                                <a href="#" class="cancel-btn" data-id="{{ appointment.id }}">
+                                    <i class="fas fa-times"></i> Reject
+                                </a>
+                            </td>
+                        </form>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You don't have any appointments yet.</p>
+    {% endif %}
+</section>
+<section>
+    <h3>Accepted Appointments</h3>
+    
+    {% if accepted_appointments %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Appointment Date</th>
+                    <th>Department</th>
+                    <th>Reason for Appointment</th>
+                    <th>Phone Number</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in accepted_appointments %}
+                    <tr>
+                        <td>{{ appointment.appointment_date|date:"F j, Y, H:i" }}</td>
+                        <td>{{ appointment.department }}</td>
+                        <td>{{ appointment.reason_for_appointment }}</td>
+                        <td>{{ appointment.phone_number }}</td>
                         <td>
-                            <a href="#" class="accept-btn">
-                                <i class="fas fa-check"></i> Accept
-                            </a>
-                            <a href="#" class="cancel-btn">
-                                <i class="fas fa-times"></i> Reject
-                            </a>
-                            
+                            {% if appointment.status == 'Confirmed' %}
+                                <span style="color: green;">Confirmed</span>
+                            {% else %}
+                                <span style="color: red;">Pending</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You don't have any appointments yet.</p>
+    {% endif %}
+</section>
+<section>
+    <h3>Rejected Appointments</h3>
+    
+    {% if cancelled_appointments %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Appointment Date</th>
+                    <th>Department</th>
+                    <th>Reason for Appointment</th>
+                    <th>Phone Number</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in cancelled_appointments %}
+                    <tr>
+                        <td>{{ appointment.appointment_date|date:"F j, Y, H:i" }}</td>
+                        <td>{{ appointment.department }}</td>
+                        <td>{{ appointment.reason_for_appointment }}</td>
+                        <td>{{ appointment.phone_number }}</td>
+                        <td>
+                            {% if appointment.status == 'Cancelled' %}
+                                <span style="color: orangered;">Cancelled</span>
+                            {% else %}
+                                <span style="color: red;">Pending</span>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
@@ -51,4 +125,11 @@
 </section>
 <link rel="stylesheet" href="{% static 'css/table_style.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<script src="{% static 'js/update_appointment_status.js' %}"></script>
+
+<!-- SweetAlert2 CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.26/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.26/dist/sweetalert2.all.min.js"></script>
+
 {% endblock %}

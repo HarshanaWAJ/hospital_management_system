@@ -18,3 +18,6 @@ class AppointmentForm(forms.ModelForm):
     
     # Emergency Contact Phone - Use 'tel' type widget
     emergency_contact_phone = forms.CharField(widget=forms.TextInput(attrs={'type': 'tel'}))
+
+    # Status
+    status = forms.CharField(widget=forms.HiddenInput(), initial='Pending')
