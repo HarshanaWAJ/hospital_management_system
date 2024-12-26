@@ -32,8 +32,10 @@ document.querySelectorAll('.accept-btn').forEach(function(button) {
                 .then(data => {
                     if (data.success) {
                         Swal.fire('Accepted!', 'Your appointment has been accepted.', 'success');
-                        // Optionally, you can reload the page or update the status dynamically
-                        document.querySelector(`#appointment-${appointmentId} td:nth-child(5)`).innerHTML = '<span style="color: green;">Accepted</span>';
+                        // Refresh the page after a successful update
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500); // Refresh after 1.5 seconds
                     } else {
                         Swal.fire('Error', 'There was an issue accepting the appointment.', 'error');
                     }
@@ -80,8 +82,10 @@ document.querySelectorAll('.cancel-btn').forEach(function(button) {
                 .then(data => {
                     if (data.success) {
                         Swal.fire('Rejected!', 'Your appointment has been rejected.', 'success');
-                        // Optionally, you can reload the page or update the status dynamically
-                        document.querySelector(`#appointment-${appointmentId} td:nth-child(5)`).innerHTML = '<span style="color: red;">Cancelled</span>';
+                        // Refresh the page after a successful update
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500); // Refresh after 1.5 seconds
                     } else {
                         Swal.fire('Error', 'There was an issue rejecting the appointment.', 'error');
                     }
