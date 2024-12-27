@@ -16,6 +16,8 @@ from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
+from appoinments.models import Appointment
+
 
 # Views
 
@@ -187,7 +189,17 @@ def admin_message(request):
 # UserDashboard View
 @login_required
 def user_dashboard(request):
-    return render(request, 'user_dashboard.html') 
+    total_appointment_count = Appointment.objects.filter(user=request.user.id).count()  # Get the total appointment count
+    total_confirmed_appointment_count = Appointment.objects.filter(status='Confirmed', user=request.user.id).count()
+    total_pending_appointment_count = Appointment.objects.filter(status='Pending', user=request.user.id).count()
+    total_cancelled_appointment_count = Appointment.objects.filter(status='Cancelled', user=request.user.id).count()
+
+    return render(request, 'user_dashboard.html', {
+        'total_appointment_count': total_appointment_count,
+        'total_confirmed_appointment_count': total_confirmed_appointment_count,
+        'total_pending_appointment_count': total_pending_appointment_count,
+        'total_cancelled_appointment_count': total_cancelled_appointment_count
+    }) 
 
 # AdminDashboard View
 @login_required
@@ -198,10 +210,15 @@ def admin_dashboard(request):
 from appoinments.models import Appointment
 @login_required
 def doctor_dashboard(request):
-    total_appointment_count = Appointment.objects.count()  # Get the total appointment count
-    print(total_appointment_count)
+    total_appointment_count = Appointment.objects.filter(referring_doctor = request.user).count()  # Get the total appointment count
+    total_confirmed_appointment_count = Appointment.objects.filter(status='Confirmed', referring_doctor = request.user).count()
+    total_pending_appointment_count = Appointment.objects.filter(status='Pending', referring_doctor = request.user).count()
+    total_cancelled_appointment_count = Appointment.objects.filter(status='Cancelled', referring_doctor = request.user).count()
     return render(request, 'doctor.dashboard.html', {
-        'total_appointment_count': total_appointment_count
+        'total_appointment_count': total_appointment_count,
+        'total_confirmed_appointment_count': total_confirmed_appointment_count,
+        'total_pending_appointment_count': total_pending_appointment_count,
+        'total_cancelled_appointment_count': total_cancelled_appointment_count
     }) 
 
 # StaffDashboard View

@@ -29,7 +29,57 @@
             </div>
         </div>
     </div>
+    <div class="appointment-summary-details">
+        <div class="card mb-5">
+            <div class="card-header">
+                <i class="fas fa-calendar-check"></i>
+                <h6>Total Appointments</h6>
+            </div>
+            <div class="card-body">
+                <div class="appointment-count">
+                    <p>{{ total_appointment_count }}</p>
+                </div>
+            </div>
+        </div>
+       <!-- Total Pending Appointments -->
+            <div class="card mb-5">
+                <div class="card-header">
+                    <i class="fas fa-clock"></i>
+                    <h6>Total Pending Appointments</h6>
+                </div>
+                <div class="card-body">
+                    <div class="appointment-count">
+                        <p>{{ total_pending_appointment_count }}</p>
+                    </div>
+                </div>
+            </div>
+    
+        <!-- Total Confirmed Appointments -->
+        <div class="card mb-5">
+            <div class="card-header">
+                <i class="fas fa-check-circle"></i>
+                <h6>Total Confirmed Appointments</h6>
+            </div>
+            <div class="card-body">
+                <div class="appointment-count">
+                    <p>{{ total_confirmed_appointment_count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-5">
+            <div class="card-header">
+                <i class="fas fa-times-circle"></i>
+                <h6>Total Rejected Appointments</h6>
+            </div>
+            <div class="card-body">
+                <div class="appointment-count">
+                    <p>{{ total_cancelled_appointment_count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Link to Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}

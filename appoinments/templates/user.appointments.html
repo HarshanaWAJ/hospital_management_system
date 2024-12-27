@@ -97,7 +97,6 @@
                     <th>Phone Number</th>
                     <td>Date and Time</td>
                     <th>Status</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -114,11 +113,6 @@
                             {% else %}
                                 <span style="color: red;">Pending</span>
                             {% endif %}
-                        </td>
-                        <td>
-                            <a href="#" class="cancel-btn" data-id="{{ appointment.id }}">
-                                <i class="fas fa-times"></i> Delete
-                            </a>                                                       
                         </td>
                     </tr>
                 {% endfor %}

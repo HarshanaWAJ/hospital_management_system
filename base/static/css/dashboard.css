@@ -79,3 +79,200 @@
     flex-direction: row;
     gap: 1rem;
 }
+
+
+/* General layout for the appointment summary section */
+/* General layout for the appointment summary section */
+.appointment-summary-details {
+    display: flex;
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+    background-color: #f8f9fa; /* Soft background color */
+    border-radius: 8px;
+    justify-content: space-between; /* Distribute cards evenly across the row */
+    flex-wrap: nowrap; /* Ensure no wrapping of cards */
+}
+
+/* Styling for each card */
+.card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    flex: 1; /* Each card takes equal width */
+    min-width: 180px; /* Ensure cards have a minimum width */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Hover effect for cards */
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Card header styling */
+.card-header {
+    position: relative;
+    background-color: #007bff;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1rem; /* Smaller header font size */
+    font-weight: 600;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Card body styling */
+.card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+/* Appointment count styling */
+.appointment-count {
+    font-size: 2rem; /* Decreased font size */
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin: 0;
+}
+
+/* Status-based colors */
+.card:nth-child(2) .card-header {
+    background-color: #f39c12 !important; /* Pending appointments */
+}
+
+.card:nth-child(3) .card-header {
+    background-color: #28a745; /* Confirmed appointments */
+}
+
+.card:nth-child(4) .card-header {
+    background-color: #dc3545; /* Rejected appointments */
+}
+
+/* Improved spacing and layout for smaller screens */
+@media (max-width: 1200px) {
+    .card {
+        flex: 1; /* Cards take equal width even on mid-sized screens */
+        min-width: 200px; /* Slightly larger minimum width */
+    }
+}
+
+/* Mobile responsiveness: All cards still in one row */
+@media (max-width: 768px) {
+    .appointment-summary-details {
+        flex-direction: row; /* Keep cards in one row */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+    }
+
+    .card {
+        flex: 1 0 20%; /* Cards will maintain a smaller size */
+        min-width: 180px; /* Minimum card width */
+    }
+
+    .card-header {
+        font-size: 0.9rem; /* Smaller font size for header on mobile */
+        padding: 12px 0;
+    }
+
+    .appointment-count {
+        font-size: 1.6rem; /* Smaller font size on mobile */
+    }
+}
+
+/* Optional typography improvements */
+body {
+    font-family: 'Roboto', sans-serif; /* Clean and modern font */
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Optional styles for adding subtle borders */
+.card-body {
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Notification Badge */
+.notification-badge {
+    background-color: red; /* A slightly orange color for better visibility */
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 0.3rem 0.7rem;
+    position: absolute;
+    top: 5%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: pulse 1.5s ease-in-out infinite;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Box shadow with enhanced effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Inner badge count styling */
+.notification-badge .badge-count {
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+/* Tooltip styling */
+.notification-badge:hover::after {
+    content: "You have pending appointments";
+    position: absolute;
+    /* top: -30px; */
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 2px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0.9;
+    visibility: visible;
+}
+
+/* Pulse Animation for the badge */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Change the background color when hovering */
+.notification-badge:hover {
+    background-color: red; /* Darker shade of orange for hover effect */
+    transform: scale(1.1);
+}
+
+.card-link {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Inherits the color from its parent element */
+    display: block; /* Makes the entire link block-level (like a div) */
+}
+.card-link .card-header {
+    background-color: #f39c12;
+}
