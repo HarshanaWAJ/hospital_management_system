@@ -204,7 +204,16 @@ def user_dashboard(request):
 # AdminDashboard View
 @login_required
 def admin_dashboard(request):
-    return render(request, 'admin.dashboard.html') 
+    total_appointment_count = Appointment.objects.count()  # Get the total appointment count
+    total_confirmed_appointment_count = Appointment.objects.filter(status='Confirmed').count()
+    total_pending_appointment_count = Appointment.objects.filter(status='Pending').count()
+    total_cancelled_appointment_count = Appointment.objects.filter(status='Cancelled').count()
+    return render(request, 'admin.dashboard.html', {
+        'total_appointment_count': total_appointment_count,
+        'total_confirmed_appointment_count': total_confirmed_appointment_count,
+        'total_pending_appointment_count': total_pending_appointment_count,
+        'total_cancelled_appointment_count': total_cancelled_appointment_count
+    }) 
 
 # DoctorDashboard View
 from appoinments.models import Appointment

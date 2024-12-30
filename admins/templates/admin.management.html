@@ -1,0 +1,190 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Manage Admins - Hospital Management System{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Manage Admins</h2>
+    <a href="{% url 'admin_reg' %}" class="btn btn-success mt-2 mb-4">Add Admin</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Admin Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Emergency Contact No</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for admin in admin_list %}
+                <tr>
+                    <td>{{ admin.title }}</td>
+                    <td>{{ admin.first_name }} {{ admin.last_name }}</td> 
+                    <td>{{ admin.gender }}</td>
+                    <td>{{ admin.email }}</td>  
+                    <td>{{ admin.dob }}</td>
+                    <td>{{ admin.street_address }}, {{ admin.street_name }}, {{ admin.town }}, {{ admin.postal_code }}</td>
+                    <td>{{ admin.contact_no }}</td>
+                    <td>{{ admin.emergency_contact_no }}</td>
+                    <td>
+                        <!-- Action buttons for Edit and Delete -->
+                        <div class="d-flex">
+                            <a href="#" class="action-btn btn-primary btn-sm mr-2 update-link" 
+                                data-id="{{ admin.id }}" 
+                                data-url="{% url 'get_admin_data' admin.id %}" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#updateModal">
+                                    <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="{% url 'admin_delete' admin.id %}" class="action-btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="9">No admins found</td> <!-- Message when no admins exist -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<!-- Modal for Updating Admin Details -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Administrator Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateForm" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="admin_id" id="admin_id">
+                    <!-- Form Fields -->
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <select class="form-control" id="title" name="title">
+                            <option value="" disabled selected>Select One</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Ms">Ms</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="user@gmail.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dob" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" name="dob">
+                    </div>
+                    <div class="mb-3">
+                        <label for="street_address" class="form-label">Street Address</label>
+                        <input type="text" class="form-control" id="street_address" name="street_address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="street_name" class="form-label">Street Name</label>
+                        <input type="text" class="form-control" id="street_name" name="street_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="town" class="form-label">Town</label>
+                        <input type="text" class="form-control" id="town" name="town">
+                    </div>
+                    <div class="mb-3">
+                        <label for="postal_code" class="form-label">Postal Code</label>
+                        <input type="text" class="form-control" id="postal_code" name="postal_code">
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact_no" class="form-label">Contact No</label>
+                        <input type="text" class="form-control" id="contact_no" name="contact_no">
+                    </div>
+                    <div class="mb-3">
+                        <label for="emergency_contact_no" class="form-label">Emergency Contact No</label>
+                        <input type="text" class="form-control" id="emergency_contact_no" name="emergency_contact_no">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Bootstrap CSS and JS via CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Custom Styles -->
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<script>
+    $(document).ready(function() {
+        // Open modal and populate the form with admin data when the edit button is clicked
+        $('.update-link').click(function(e) {
+            e.preventDefault();
+            
+            // Retrieve the dynamic URL for this specific admin
+            var url = $(this).data('url');
+            
+            // Fetch admin data using AJAX and populate the modal
+            $.get(url, function(data) {
+                $('#admin_id').val(data.admin.id);
+                $('#title').val(data.admin.title);
+                $('#first_name').val(data.admin.first_name);
+                $('#last_name').val(data.admin.last_name);
+                $('#gender').val(data.admin.gender);
+                $('#email').val(data.admin.email);
+                $('#dob').val(data.admin.dob);
+                $('#street_address').val(data.admin.street_address);
+                $('#street_name').val(data.admin.street_name);
+                $('#town').val(data.admin.town);
+                $('#postal_code').val(data.admin.postal_code);
+                $('#contact_no').val(data.admin.contact_no);
+                $('#emergency_contact_no').val(data.admin.emergency_contact_no);
+            });
+        });
+
+        // Handle form submission using AJAX
+        $('#updateForm').submit(function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.post('admins/update-admin/', formData, function(response) {
+                if (response.success) {
+                    $('#updateModal').modal('hide');
+                    alert(response.message);
+                    location.reload(); // Reload the page to reflect updated data
+                } else {
+                    alert(response.message);
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
