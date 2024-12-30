@@ -17,8 +17,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from appoinments.models import Appointment
-
-
 # Views
 
 #Home with Contact Form
@@ -80,7 +78,6 @@ def login_view(request):
             }
             print(user_details)
             login(request, user)
-
             if (user.is_user):
                 return redirect('user_dashboard') 
             elif (user.is_admin):

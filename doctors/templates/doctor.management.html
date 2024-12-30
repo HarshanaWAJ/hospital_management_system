@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Manage Admins - Hospital Management System{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Manage Admins</h2>
+    <a href="{% url 'doctor_reg' %}" class="btn btn-success mt-2 mb-4">Doctor Registration</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Admin Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Emergency Contact No</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctor_list %}
+                <tr>
+                    <td>{{ doctor.title }}</td>
+                    <td>{{ doctor.first_name }} {{ doctor.last_name }}</td>
+                    <td>{{ doctor.gender }}</td>
+                    <td>{{ doctor.email }}</td>
+                    <td>{{ doctor.dob }}</td>
+                    <td>{{ doctor.street_address }}, {{ doctor.street_name }}, {{ doctor.town }}, {{ doctor.postal_code }}</td>
+                    <td>{{ doctor.contact_no }}</td>
+                    <td>{{ doctor.emergency_contact_no }}</td>
+                    <td>
+                        <!-- Action buttons for Edit and Delete -->
+                        <div class="d-flex">
+                            <a href="#" class="action-btn btn-primary btn-sm mr-2">
+                                    <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="{% url 'delete_doctor' doctor.id %}" class="action-btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="9">No Doctor Details found</td> <!-- Message when no admins exist -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<!-- Add Bootstrap CSS and JS via CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Custom Styles -->
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+{% endblock %}

@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .reg_doctor_form import DoctorForm
+from .models import Doctor
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register_doctor(request):
@@ -7,7 +9,7 @@ def register_doctor(request):
         form = DoctorForm(request.POST)
         if form.is_valid():
             form.save()  # Save the form data (creates a new Doctor instance)
-            return redirect('doctor_list')  # Redirect after successful form submission
+            return redirect('doctor_management')  # Redirect after successful form submission
         else:
             # Print form errors if form is not valid
             print("Form is not valid!")
@@ -16,3 +18,17 @@ def register_doctor(request):
         form = DoctorForm()  # Create an empty form instance
 
     return render(request, 'doctor.registration.html', {'form': form})
+
+
+@login_required
+def doctor_management(request):
+    doctor_list = Doctor.objects.all()
+    return render(request, 'doctor.management.html', {
+        'doctor_list': doctor_list
+    })
+
+@login_required
+def delete_doctor(request, id):
+    admin = Doctor.objects.get(id=id)
+    admin.delete()
+    return redirect('doctor_management')

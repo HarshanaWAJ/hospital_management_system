@@ -154,3 +154,24 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # This is the def
 EMAIL_HOST = 'smtp.gmail.com'  # Or your own email provider
 EMAIL_PORT = 587  # Typically 587 for TLS
 EMAIL_USE_TLS = True  # Enable TLS for secure email sending
+
+
+# Log details configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'user_activity.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

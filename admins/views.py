@@ -60,3 +60,29 @@ def get_admin_data(request, admin_id):
         }
     }
     return JsonResponse(data)
+
+
+def update_admin(request):
+    if request.method == 'POST':
+        admin_id = request.POST.get('admin_id')  # Get the admin ID from the form
+        admin = get_object_or_404(SiteAdmin, id=admin_id)
+
+        # Update the admin fields
+        admin.title = request.POST.get('title')
+        admin.first_name = request.POST.get('first_name')
+        admin.last_name = request.POST.get('last_name')
+        admin.gender = request.POST.get('gender')
+        admin.email = request.POST.get('email')
+        admin.dob = request.POST.get('dob')
+        admin.street_address = request.POST.get('street_address')
+        admin.street_name = request.POST.get('street_name')
+        admin.town = request.POST.get('town')
+        admin.postal_code = request.POST.get('postal_code')
+        admin.contact_no = request.POST.get('contact_no')
+        admin.emergency_contact_no = request.POST.get('emergency_contact_no')
+
+        admin.save()  # Save the updated admin details
+
+        # Return a success message
+        return JsonResponse({'success': True, 'message': 'Admin updated successfully'})
+    return JsonResponse({'success': False, 'message': 'Invalid request'})

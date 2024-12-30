@@ -24,9 +24,9 @@
             {% for admin in admin_list %}
                 <tr>
                     <td>{{ admin.title }}</td>
-                    <td>{{ admin.first_name }} {{ admin.last_name }}</td> 
+                    <td>{{ admin.first_name }} {{ admin.last_name }}</td>
                     <td>{{ admin.gender }}</td>
-                    <td>{{ admin.email }}</td>  
+                    <td>{{ admin.email }}</td>
                     <td>{{ admin.dob }}</td>
                     <td>{{ admin.street_address }}, {{ admin.street_name }}, {{ admin.town }}, {{ admin.postal_code }}</td>
                     <td>{{ admin.contact_no }}</td>
@@ -173,14 +173,24 @@
         // Handle form submission using AJAX
         $('#updateForm').submit(function(e) {
             e.preventDefault();
-            var formData = $(this).serialize();
-            $.post('admins/update-admin/', formData, function(response) {
-                if (response.success) {
-                    $('#updateModal').modal('hide');
-                    alert(response.message);
-                    location.reload(); // Reload the page to reflect updated data
-                } else {
-                    alert(response.message);
+            var formData = $(this).serialize();  // Serialize form data
+            
+            // Dynamically use the update URL
+            $.ajax({
+                url: 'admins/update-admin/',  // Ensure this is the correct URL to handle form submission
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        $('#updateModal').modal('hide');
+                        alert(response.message);
+                        location.reload();  // Reload the page to reflect updated data
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function() {
+                    alert('An error occurred while updating the admin data.');
                 }
             });
         });
