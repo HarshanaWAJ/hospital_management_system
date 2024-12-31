@@ -53,7 +53,7 @@ def delete_appointment(request, id):
 
         print(time_diff)
         
-        if time_diff > timedelta(hours=1):  # If the appointment is more than 1 hour away
+        if time_diff > timedelta(hours=1) or time_diff < timedelta(0) :  # If the appointment is more than 1 hour away
             appointment.delete()  # Delete the appointment
             messages.success(request, 'Your appointment has been successfully deleted.')
             return redirect('my_appointments')  # Redirect to 'my_appointments' after successful deletion
