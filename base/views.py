@@ -232,6 +232,22 @@ def doctor_dashboard(request):
 def staff_dashboard(request):
     return render(request, 'staff.dashboard.html') 
 
+
+import os
+from django.shortcuts import render
+
+def show_user_activity(request):
+    log_file_path = 'user_activity.log'
+    # Check if the log file exists
+    if os.path.exists(log_file_path):
+        with open(log_file_path, 'r') as log_file:
+            log_content = log_file.readlines()  # Read the log file line by line
+    else:
+        log_content = []
+
+    # Pass the log entries to the template
+    return render(request, 'user_activity.html', {'log_entries': log_content})
+
 # --------------------------------------------------------------------------------------------------------------
 # Account Registration Mail Sending
 def send_account_creation_email(user):
