@@ -3,53 +3,138 @@
 {% block title %}Manage Admins - Hospital Management System{% endblock %}
 
 {% block content %}
-<section>
+<section class="container mt-4">
     <h2>Manage Admins</h2>
     <a href="{% url 'doctor_reg' %}" class="btn btn-success mt-2 mb-4">Doctor Registration</a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Admin Name</th>
-                <th>Gender</th>
-                <th>Email</th>
-                <th>Date of Birth</th>
-                <th>Address</th>
-                <th>Contact Number</th>
-                <th>Emergency Contact No</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for doctor in doctor_list %}
+
+    <!-- Filters Row (Search, Specialty, Degree) -->
+    <div class="row mb-4 align-items-center">
+        <!-- Search Filter -->
+        <div class="col-md-3 mb-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-search"></i> <!-- Search Icon -->
+                    </span>
+                </div>
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by Doctor Name..." onkeyup="filterDoctors()">
+            </div>
+        </div>
+
+        <!-- Specialty Filter -->
+        <div class="col-md-3 mb-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-stethoscope"></i> <!-- Specialty Icon -->
+                    </span>
+                </div>
+                <select id="specialtySelect" class="form-control" onchange="filterDoctors()">
+                    <option value="">All Specialties</option>
+                    <option value="general">General</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="neurology">Neurology</option>
+                    <option value="pediatrics">Pediatrics</option>
+                    <option value="orthopedics">Orthopedics</option>
+                    <option value="dermatology">Dermatology</option>
+                    <option value="radiology">Radiology</option>
+                    <option value="gastroenterology">Gastroenterology</option>
+                    <option value="endocrinology">Endocrinology</option>
+                    <option value="psychiatry">Psychiatry</option>
+                    <option value="obstetrics">Obstetrics and Gynecology</option>
+                    <option value="ophthalmology">Ophthalmology</option>
+                    <option value="urology">Urology</option>
+                    <option value="dentistry">Dentistry</option>
+                    <option value="pulmonology">Pulmonology</option>
+                    <option value="general_surgery">General Surgery</option>
+                    <option value="emergency_medicine">Emergency Medicine</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Degree Filter -->
+        <div class="col-md-3 mb-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-graduation-cap"></i> <!-- Degree Icon -->
+                    </span>
+                </div>
+                <select id="degreeSelect" class="form-control" onchange="filterDoctors()">
+                    <option value="">All Degrees</option>
+                    <option value="MBBS">MBBS</option>
+                    <option value="MD">MD</option>
+                    <option value="MS">MS</option>
+                    <option value="BSc">BSc</option>
+                    <option value="DNB">DNB</option>
+                    <option value="DO">DO</option>
+                    <option value="Fellowship">Fellowship</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Clear Filters Button -->
+        <div class="col-md-3 mb-3">
+            <button class="btn btn-warning btn-block" onclick="clearFilters()">Clear Filters</button>
+        </div>
+    </div>
+
+    <!-- Table container to control width -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>{{ doctor.title }}</td>
-                    <td>{{ doctor.first_name }} {{ doctor.last_name }}</td>
-                    <td>{{ doctor.gender }}</td>
-                    <td>{{ doctor.email }}</td>
-                    <td>{{ doctor.dob }}</td>
-                    <td>{{ doctor.street_address }}, {{ doctor.street_name }}, {{ doctor.town }}, {{ doctor.postal_code }}</td>
-                    <td>{{ doctor.contact_no }}</td>
-                    <td>{{ doctor.emergency_contact_no }}</td>
-                    <td>
-                        <!-- Action buttons for Edit and Delete -->
-                        <div class="d-flex">
-                            <a href="#" class="action-btn btn-primary btn-sm mr-2">
+                    <th>Title</th>
+                    <th>Admin Name</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Address</th>
+                    <th>Contact Number</th>
+                    <th>Emergency Contact No</th>
+                    <th>Edu. Qualification</th>
+                    <th>Specialty</th>
+                    <th>Exp</th>
+                    <th>License</th>
+                    <th>Position</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="doctorTableBody">
+                {% for doctor in doctor_list %}
+                    <tr class="doctor-row">
+                        <td>{{ doctor.title }}</td>
+                        <td>{{ doctor.first_name }} {{ doctor.last_name }}</td>
+                        <td>{{ doctor.gender }}</td>
+                        <td>{{ doctor.email }}</td>
+                        <td>{{ doctor.dob }}</td>
+                        <td>{{ doctor.street_address }}, {{ doctor.street_name }}, {{ doctor.town }}, {{ doctor.postal_code }}</td>
+                        <td>{{ doctor.contact_no }}</td>
+                        <td>{{ doctor.emergency_contact_no }}</td>
+                        <td>{{ doctor.degree }}</td>
+                        <td>{{ doctor.specialty }}</td>
+                        <td> {{ doctor.years_of_experience }}</td>
+                        <td> {{ doctor.license_number }}</td>
+                        <td> {{ doctor.position }}</td>
+                        <td>
+                            <div class="d-flex">
+                                <a href="#" class="action-btn btn-primary btn-sm mr-2">
                                     <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a href="{% url 'delete_doctor' doctor.id %}" class="action-btn btn-danger btn-sm">
-                                <i class="fas fa-trash"></i> Delete
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="9">No Doctor Details found</td> <!-- Message when no admins exist -->
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                                </a>
+                                <a href="{% url 'delete_doctor' doctor.id %}" class="action-btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="9">No Doctor Details found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </section>
 
 <!-- Add Bootstrap CSS and JS via CDN -->
@@ -61,5 +146,48 @@
 
 <!-- Custom Styles -->
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<!-- JavaScript for Real-Time Search and Filtering -->
+<script>
+    function filterDoctors() {
+        // Get the search term and filter values
+        let searchFilter = document.getElementById("searchInput").value.toLowerCase();
+        let specialtyFilter = document.getElementById("specialtySelect").value.toLowerCase();
+        let degreeFilter = document.getElementById("degreeSelect").value.toLowerCase();
+
+        let rows = document.getElementsByClassName("doctor-row");
+
+        // Loop through each doctor row
+        for (let i = 0; i < rows.length; i++) {
+            let nameCell = rows[i].getElementsByTagName("td")[1]; // Doctor Name cell
+            let specialtyCell = rows[i].getElementsByTagName("td")[9]; // Specialty cell
+            let degreeCell = rows[i].getElementsByTagName("td")[8]; // Degree cell
+
+            // Get the text content of the cells
+            let nameText = nameCell.textContent || nameCell.innerText;
+            let specialtyText = specialtyCell.textContent || specialtyCell.innerText;
+            let degreeText = degreeCell.textContent || degreeCell.innerText;
+
+            // Check if the row matches all the filters
+            if (
+                nameText.toLowerCase().includes(searchFilter) &&
+                (specialtyFilter === "" || specialtyText.toLowerCase() === specialtyFilter) &&
+                (degreeFilter === "" || degreeText.toLowerCase() === degreeFilter)
+            ) {
+                rows[i].style.display = ""; // Show row
+            } else {
+                rows[i].style.display = "none"; // Hide row
+            }
+        }
+    }
+
+    // Function to clear all filters
+    function clearFilters() {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("specialtySelect").value = "";
+        document.getElementById("degreeSelect").value = "";
+        filterDoctors();  // Reapply the filter with cleared values
+    }
+</script>
 
 {% endblock %}

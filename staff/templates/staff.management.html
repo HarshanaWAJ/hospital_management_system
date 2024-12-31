@@ -1,0 +1,166 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Manage Admins - Hospital Management System{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Manage Staff Members</h2>
+    
+    <!-- Search and Position Filter -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <!-- Search by Name -->
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-search"></i> <!-- Search Icon -->
+                    </span>
+                </div>
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by Staff Name..." onkeyup="filterStaff()">
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <!-- Filter by Position -->
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-filter"></i> <!-- Filter Icon -->
+                    </span>
+                </div>
+                <select class="form-control" id="positionFilter" onchange="filterStaff()">
+                    <option value="">All Positions</option>
+                    <option value="Intern">Intern</option>
+                    <option value="Nurse">Nurse</option>
+                    <option value="Registered Nurse">Registered Nurse</option>
+                    <option value="Licensed Practical Nurse">Licensed Practical Nurse</option>
+                    <option value="Physician Assistant">Physician Assistant</option>
+                    <option value="Nurse Practitioner">Nurse Practitioner</option>
+                    <option value="Medical Technologist">Medical Technologist</option>
+                    <option value="Laboratory Technician">Laboratory Technician</option>
+                    <option value="Radiologic Technologist">Radiologic Technologist</option>
+                    <option value="Phlebotomist">Phlebotomist</option>
+                    <option value="Pharmacist">Pharmacist</option>
+                    <option value="Pharmacy Technician">Pharmacy Technician</option>
+                    <option value="Physical Therapist">Physical Therapist</option>
+                    <option value="Occupational Therapist">Occupational Therapist</option>
+                    <option value="Social Worker">Social Worker</option>
+                    <option value="Dietitian">Dietitian</option>
+                    <option value="Medical Records Technician">Medical Records Technician</option>
+                    <option value="Health Information Technician">Health Information Technician</option>
+                    <option value="Respiratory Therapist">Respiratory Therapist</option>
+                    <option value="Housekeeping">Housekeeping</option>
+                    <option value="Sterile Processing Technician">Sterile Processing Technician</option>
+                    <option value="EMT">EMT</option>
+                    <option value="Paramedic">Paramedic</option>
+                    <option value="Patient Care Technician">Patient Care Technician</option>
+                    <option value="Surgical Technologist">Surgical Technologist</option>
+                    <option value="IT Support">IT Support</option>
+                    <option value="Security Officer">Security Officer</option>
+                    <option value="Chaplain">Chaplain</option>
+                    <option value="Transporter">Transporter</option>
+                    <option value="Logistics Coordinator">Logistics Coordinator</option>
+                    <!-- Add other positions as needed -->
+                </select>
+            </div>
+        </div>
+        <!-- Clear Filters Button -->
+        <div class="col-md-4 mb-3">
+            <button class="btn btn-secondary" id="clearFiltersBtn" onclick="clearFilters()">Clear Filters</button>
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Member Name</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>Contact Number</th>
+                <th>Emergency Contact No</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="staffTableBody">
+            {% for member in staff_list %}
+                <tr class="staff-row" data-position="{{ member.position }}">
+                    <td>{{ member.title }}</td>
+                    <td>{{ member.first_name }} {{ member.last_name }}</td>
+                    <td>{{ member.gender }}</td>
+                    <td>{{ member.email }}</td>
+                    <td>{{ member.dob }}</td>
+                    <td>{{ member.street_address }}, {{ member.street_name }}, {{ member.town }}, {{ member.postal_code }}</td>
+                    <td>{{ member.contact_no }}</td>
+                    <td>{{ member.emergency_contact_no }}</td>
+                    <td>{{ member.position }}</td>
+                    <td>
+                        <!-- Action buttons for Edit and Delete -->
+                        <div class="d-flex">
+                            <a href="#" class="action-btn btn-primary btn-sm mr-2">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <a href="#" class="action-btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="10">No Staff Member Details found</td> <!-- Message when no staff members exist -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<!-- Add Bootstrap CSS and JS via CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Custom Styles -->
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<script>
+    // Function to filter staff based on search input and position
+    function filterStaff() {
+        var searchFilter = document.getElementById("searchInput").value.toLowerCase();
+        var positionFilter = document.getElementById("positionFilter").value.toLowerCase();
+        var rows = document.querySelectorAll(".staff-row");
+
+        rows.forEach(function(row) {
+            var nameCell = row.cells[1]; // Member Name cell
+            var nameText = nameCell.textContent || nameCell.innerText;
+            var positionCell = row.getAttribute('data-position').toLowerCase(); // Position data attribute
+
+            // Filter by Name and Position
+            if (nameText.toLowerCase().includes(searchFilter) && 
+                (positionFilter === "" || positionCell.includes(positionFilter))) {
+                row.style.display = ""; // Show row if it matches the filters
+            } else {
+                row.style.display = "none"; // Hide row if it doesn't match
+            }
+        });
+    }
+
+    // Function to clear filters and reset the table
+    function clearFilters() {
+        // Reset the search input and position filter
+        document.getElementById("searchInput").value = "";
+        document.getElementById("positionFilter").value = "";
+        
+        // Reset all rows to be visible
+        var rows = document.querySelectorAll(".staff-row");
+        rows.forEach(function(row) {
+            row.style.display = ""; // Show all rows
+        });
+    }
+</script>
+
+{% endblock %}

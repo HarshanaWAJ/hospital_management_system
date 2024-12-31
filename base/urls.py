@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('doctor_dashboard/', views.doctor_dashboard, name='doctor_dashboard'),
     path('staff_dashboard/', views.staff_dashboard, name='staff_dashboard'),
+
+    path('user-activity-logs/', views.show_user_activity, name='user_activity_logs'),
 ]

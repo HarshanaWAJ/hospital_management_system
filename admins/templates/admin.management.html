@@ -6,6 +6,21 @@
 <section>
     <h2>Manage Admins</h2>
     <a href="{% url 'admin_reg' %}" class="btn btn-success mt-2 mb-4">Add Admin</a>
+
+    <div class="row mb-4 align-items-center">
+        <!-- Search Filter -->
+        <div class="col-md-3 mb-3">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fas fa-search"></i> <!-- Search Icon -->
+                    </span>
+                </div>
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by Admin Name..." onkeyup="filterAdmins()">
+            </div>
+        </div>
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -20,9 +35,9 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="adminTableBody">
             {% for admin in admin_list %}
-                <tr>
+                <tr class="admin-row">
                     <td>{{ admin.title }}</td>
                     <td>{{ admin.first_name }} {{ admin.last_name }}</td>
                     <td>{{ admin.gender }}</td>
@@ -195,6 +210,24 @@
             });
         });
     });
+
+    // Function to filter admins based on real-time search input
+    function filterAdmins() {
+        var searchFilter = document.getElementById("searchInput").value.toLowerCase();
+        var rows = document.querySelectorAll(".admin-row");
+
+        rows.forEach(function(row) {
+            var adminNameCell = row.cells[1]; // Admin Name cell
+            var adminNameText = adminNameCell.textContent || adminNameCell.innerText;
+
+            // Compare the text content of the Admin Name with the search filter
+            if (adminNameText.toLowerCase().includes(searchFilter)) {
+                row.style.display = ""; // Show row if match found
+            } else {
+                row.style.display = "none"; // Hide row if no match
+            }
+        });
+    }
 </script>
 
 {% endblock %}

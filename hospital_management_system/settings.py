@@ -164,14 +164,24 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'user_activity.log',
+            'filename': 'user_activity.log',  # Absolute path
         },
     },
     'loggers': {
-        'django': {
+        'django.db.backends': {
+            'handlers': ['file'],
+            'level': 'DEBUG',  # Use DEBUG for detailed queries
+            'propagate': False,
+        },
+        'django.contrib.auth': {
             'handlers': ['file'],
             'level': 'DEBUG',
-            'propagate': True,
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
         },
     },
 }

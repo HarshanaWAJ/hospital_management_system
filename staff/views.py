@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .staff_reg_form import StaffRegForm
+from .models import Staff
 
 # Create your views here.
 def register_staff(request):
@@ -16,3 +17,11 @@ def register_staff(request):
         form = StaffRegForm()  # Create an empty form instance
 
     return render(request, 'staff.registration.html', {'form': form})
+
+
+# Staff Management Page View
+def staff_management(request):
+    staff_list = Staff.objects.all()
+    return render(request, 'staff.management.html', {
+        'staff_list': staff_list
+    })

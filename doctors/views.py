@@ -27,6 +27,7 @@ def doctor_management(request):
         'doctor_list': doctor_list
     })
 
+
 @login_required
 def delete_doctor(request, id):
     admin = Doctor.objects.get(id=id)
