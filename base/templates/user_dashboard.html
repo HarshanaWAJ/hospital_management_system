@@ -16,6 +16,16 @@
                 </div>
             </div>
         </div>
+        <section>
+            <div class="summary mb-5">
+                <h3>Appointment Summary</h3>
+                <!-- Pie Chart Container -->
+                <div class="pie-chart-container">
+                    <canvas id="appointmentsPieChart" width="400" height="400"></canvas>
+                </div>
+                
+            </div>
+        </section>
         <div class="content">
             <div class="options">
                 <a href="{% url 'create_appointment' %}" class="btn">
@@ -82,4 +92,61 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script>
+        // Pass the appointment counts correctly into JavaScript (without quotes)
+        const pendingCount = {{ total_pending_appointment_count }};
+        const acceptedCount = {{ total_confirmed_appointment_count }};
+        const cancelledCount = {{ total_cancelled_appointment_count }};
+        
+        // Ensure the chart is being initialized after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('appointmentsPieChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'doughnut',  // Doughnut chart type (you can also use 'pie' here)
+                data: {
+                    labels: ['Pending', 'Confirmed', 'Cancelled'],  // Labels for each section
+                    datasets: [{
+                        data: [pendingCount, acceptedCount, cancelledCount],  // The actual counts
+                        backgroundColor: ['#FFCD56', '#36A2EB', '#FF5733'],  // Colors for each section
+                        hoverBackgroundColor: ['#FFB800', '#2592C1', '#FF2D1D'], // Hover colors
+                        borderColor: '#ffffff',  // Border color between sections
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,  // Make chart responsive
+                    plugins: {
+                        legend: {
+                            position: 'top',  // Position legend at the top
+                            labels: {
+                                font: {
+                                    size: 14,  // Legend font size
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)', // Dark background for tooltips
+                            titleFont: { size: 16 },
+                            bodyFont: { size: 14 },
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw + ' appointments'; // Custom tooltip text
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true, // Animate scale when updating
+                        animateRotate: true  // Animate rotation when updating
+                    }
+                }
+            });
+        });
+    </script>
+    
 {% endblock %}

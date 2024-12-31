@@ -111,7 +111,7 @@
                             {% if appointment.is_confirmed %}
                                 <span style="color: green;">Confirmed</span>
                             {% else %}
-                                <span style="color: red;">Pending</span>
+                                <span style="color: red;">Rejected</span>
                             {% endif %}
                         </td>
                     </tr>
@@ -132,4 +132,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.26/dist/sweetalert2.all.min.js"></script>
 
 <script src="{% static 'js/delete_appointment.js' %}"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}

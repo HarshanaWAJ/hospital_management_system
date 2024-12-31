@@ -317,3 +317,13 @@ body {
   .filter-option {
     max-width: 200px;
   }
+
+  /* Main styling for the summary */
+.appointment-summary {
+    padding: 20px;
+    background-color: #bebebe;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+

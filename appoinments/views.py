@@ -36,13 +36,22 @@ def make_appointment(request):
     return render(request, 'make.appointments.html', {'appointments_form': form})
 
 def user_view_appointments(request):
+    total_appointments_count = Appointment.objects.filter(user=request.user.id).count()
+    pending_appointments_count = Appointment.objects.filter(user=request.user.id, status='Pending').count()
+    accepted_appointments_count = Appointment.objects.filter(user=request.user.id, status='Confirmed').count()
+    cancelled_appointments_count = Appointment.objects.filter(user=request.user.id, status='Cancelled').count()
+
     pending_appointments = Appointment.objects.filter(user=request.user.id, status='Pending')
     accepted_appointments = Appointment.objects.filter(user=request.user.id, status='Confirmed')
     cancelled_appointments = Appointment.objects.filter(user=request.user.id, status='Cancelled')
     return render(request, 'user.appointments.html', {
         'pending_appointments': pending_appointments,
         'accepted_appointments': accepted_appointments,
-        'cancelled_appointments': cancelled_appointments
+        'cancelled_appointments': cancelled_appointments,
+        'total_appointments_count': total_appointments_count,
+        'pending_appointments_count': pending_appointments_count,
+        'accepted_appointments_count': accepted_appointments_count,
+        'cancelled_appointments_count': cancelled_appointments_count
     })
 
 def delete_appointment(request, id):
