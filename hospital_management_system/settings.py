@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'doctors',
     'admins',
     'staff',
+    'patient',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'doctors/static'),
     os.path.join(BASE_DIR, 'admins/static'),
     os.path.join(BASE_DIR, 'staff/static'),
+    os.path.join(BASE_DIR, 'patient/static'),
 ]
 
 # Default primary key field type
