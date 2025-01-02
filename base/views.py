@@ -17,6 +17,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from appoinments.models import Appointment
+from patient.models import ClinicPatient, OPDPatient, AdmittedPatient, Patient
 # Views
 
 #Home with Contact Form
@@ -236,7 +237,26 @@ def doctor_dashboard(request):
 # StaffDashboard View
 @login_required
 def staff_dashboard(request):
-    return render(request, 'staff.dashboard.html') 
+    total_clinic_patient_count = ClinicPatient.objects.count()
+    total_opd_patient_count = OPDPatient.objects.count()
+    total_admitted_patient_count = AdmittedPatient.objects.count()
+    total_patient_count = total_admitted_patient_count+total_clinic_patient_count+total_opd_patient_count  
+
+    # Lists of patients
+    clinic_patients = ClinicPatient.objects.all()
+    opd_patients = OPDPatient.objects.all()
+    admitted_patients = AdmittedPatient.objects.all()
+
+    # return the view
+    return render(request, 'staff.dashboard.html', {
+        'total_patient_count': total_patient_count,
+        'total_clinic_patient_count': total_clinic_patient_count,
+        'total_opd_patient_count': total_opd_patient_count,
+        'total_admitted_patient_count': total_admitted_patient_count, 
+        'admitted_patients': admitted_patients, 
+        'clinic_patients': clinic_patients,
+        'opd_patients': opd_patients
+    }) 
 
 
 import os
