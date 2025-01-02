@@ -28,7 +28,9 @@
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <!-- Conditional Dashboard Navigation -->
-                            {% if request.user.is_user %}
+                            {% if request.user.is_superuser %}
+                            <li><a class="dropdown-item" href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+                            {% elif request.user.is_user %}
                                 <li><a class="dropdown-item" href="{% url 'user_dashboard' %}">User Dashboard</a></li>
                             {% elif request.user.is_admin %}
                                 <li><a class="dropdown-item" href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>

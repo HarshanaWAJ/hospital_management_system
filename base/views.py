@@ -68,9 +68,9 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-
             # Get User Details
             user_details = {
+                'is_super_user': user.is_superuser,
                 'is_user': user.is_user,
                 'is_admin': user.is_admin,
                 'is_staff': user.is_staff,
@@ -78,20 +78,26 @@ def login_view(request):
             }
             print(user_details)
             login(request, user)
-            if (user.is_user):
-                return redirect('user_dashboard') 
-            elif (user.is_admin):
+
+            # Check user roles and redirect accordingly
+            if user.is_superuser:
+                return redirect('admin_dashboard')  # Redirect superuser to the admin dashboard
+            elif user.is_user:
+                return redirect('user_dashboard')
+            elif user.is_admin:
                 return redirect('admin_dashboard')
-            elif (user.is_staff):
+            elif user.is_staff:
                 return redirect('staff_dashboard')
-            elif (user.is_doctor):
+            elif user.is_doctor:
                 return redirect('doctor_dashboard')
             else:
                 messages.error(request, "No Authorities")
         else:
-            messages.error(request, "Invalid email or password")
+            # Instead of messages, pass an error flag to the context
+            return render(request, 'login.html', {'invalid_credentials': True})
 
     return render(request, 'login.html')
+
 
 
 

@@ -37,7 +37,7 @@ class ClinicPatient(Patient):
     clinic_reg_id = models.CharField(max_length=100, unique=True)
     clinic_name = models.CharField(max_length=100)
     clinic_id = models.CharField(max_length=100)
-    clinic_day = models.CharField(choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), 
+    clinic_day = models.CharField(max_length=100,choices=[('Monday', 'Monday'), ('Tuesday', 'Tuesday'), 
                                             ('Wednesday', 'Wednesday'), ('Thursday', 'Thursday'),
                                             ('Friday', 'Friday'), ('Saturday', 'Saturday'),
                                             ('Sunday', 'Sunday')])
