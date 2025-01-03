@@ -62,7 +62,7 @@ class ClinicPatient(Patient):
 class AdmittedPatient(Patient):
     admission_no = models.CharField(max_length=100, unique=True)
     admission_date = models.DateField()
-    discharge_date = models.DateField()
+    discharge_date = models.DateField(null=True, blank=True)
     room_no = models.CharField(max_length=10)
     bed_no = models.CharField(max_length=10)
     ward_no = models.CharField(max_length=10)

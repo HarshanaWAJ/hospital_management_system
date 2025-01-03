@@ -13,7 +13,7 @@
             </div>
             <div class="welcome_text">
                 <h2>Hello, {{ user.first_name }} {{ user.last_name }}</h2>
-                <p>Welcome back to your dashboard.</p>
+                <p>Welcome Back!</p>
             </div>
         </div>
     </div>
@@ -43,6 +43,7 @@
                     <p>{{ total_clinic_patient_count }}</p>
                 </div>
             </div>
+            <a href="#" class="btn">Registration</a>
         </div>
     
         <!-- OPD Patients -->
@@ -56,10 +57,10 @@
                     <p>{{ total_opd_patient_count }}</p>
                 </div>
             </div>
+            <a href="{% url 'opd_patient_reg' %}" class="btn">Registration</a>
         </div>
     
         <!-- Admitted Patients -->
-        <a href="">
             <div class="card mb-5">
                 <div class="card-header" style="background-color: #F44336; color: white;">
                     <i class="fas fa-procedures"></i>
@@ -70,11 +71,10 @@
                         <p>{{ total_admitted_patient_count }}</p>
                     </div>
                 </div>
+                <a href="{% url 'admitted_patient_reg' %}" class="btn">Registration</a>
             </div>
-        </a>
+        </div>
     </div>
-
-</div>
 
 <div class="patient-summary-details mt-5">
     <div class="container my-4">

@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 
-{% block title %}Create a New OPD Patient - Hospital Management System{% endblock %}
+{% block title %}Create a New Admitted Patient - Hospital Management System{% endblock %}
 
 {% block content %}
 <section class="h-custom">
@@ -10,7 +10,7 @@
 
     <div class="container mt-5">
         <!-- Heading -->
-        <h1 class="text-center mb-5 fw-bold doctor-form-title">OPD Patient Details Registration</h1>
+        <h1 class="text-center mb-5 fw-bold doctor-form-title">Admitted Patient Details Registration</h1>
 
         <!-- Form start -->
         <form method="POST" enctype="multipart/form-data">
@@ -169,11 +169,59 @@
                     <div class="row">
                         <!-- OPD Registration ID -->
                         <div class="col-md-6 mb-3">
-                            <label for="opd_reg_id" class="form-label">OPD Registration ID</label>
-                            {{ form.opd_reg_id }}
-                            {% if form.opd_reg_id.errors %}
+                            <label for="opd_reg_id" class="form-label">Addmission Number</label>
+                            {{ form.admission_no }}
+                            {% if form.admission_no.errors %}
                                 <div class="text-danger">
-                                    {% for error in form.opd_reg_id.errors %}
+                                    {% for error in form.admission_no.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="opd_reg_id" class="form-label">Addmission Date</label>
+                            {{ form.admission_date }}
+                            {% if form.admission_date.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.admission_date.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="opd_reg_id" class="form-label">Ward Number</label>
+                            {{ form.ward_no }}
+                            {% if form.ward_no.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.ward_no.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="opd_reg_id" class="form-label">Room Number</label>
+                            {{ form.room_no }}
+                            {% if form.room_no.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.room_no.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="opd_reg_id" class="form-label">Bed Number</label>
+                            {{ form.bed_no }}
+                            {% if form.bed_no.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.bed_no.errors %}
                                         <p>{{ error }}</p>
                                     {% endfor %}
                                 </div>
