@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Patient(models.Model):
     reg_id = models.CharField(max_length=100, unique=True)
@@ -54,6 +55,8 @@ class ClinicPatient(Patient):
         ('All Days', 'All Days')
     ]
     clinic_day = models.CharField(max_length=100, choices=clinic_day_choices, default='All Days')
+    registered_date = models.DateField(default=timezone.now)
+
 
     def __str__(self):
         return f"Clinic: {self.reg_id} {self.clinic_name}"

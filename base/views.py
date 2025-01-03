@@ -17,7 +17,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from appoinments.models import Appointment
-from patient.models import ClinicPatient, OPDPatient, AdmittedPatient, Patient
+from patient.models import ClinicPatient, OPDPatient, AdmittedPatient
 # Views
 
 #Home with Contact Form
@@ -212,11 +212,36 @@ def admin_dashboard(request):
     total_confirmed_appointment_count = Appointment.objects.filter(status='Confirmed').count()
     total_pending_appointment_count = Appointment.objects.filter(status='Pending').count()
     total_cancelled_appointment_count = Appointment.objects.filter(status='Cancelled').count()
+    
+    # Patient Details
+    total_patient_count = ClinicPatient.objects.count() + OPDPatient.objects.count() + AdmittedPatient.objects.count()
+    total_admitted_patient_count = AdmittedPatient.objects.filter(status='Admitted').count()
+    total_clinic_patient_count = ClinicPatient.objects.count()
+    total_opd_patient_count = OPDPatient.objects.count()
+    total_discharged_patient_count = AdmittedPatient.objects.filter(status='Discharged').count()
+    sum_admitted_patient_count = AdmittedPatient.objects.count()
+
+    # Compare the total admitted patients with the total discharged patients
+    if sum_admitted_patient_count > 0:
+        discharge_rate = (total_discharged_patient_count / sum_admitted_patient_count) * 100
+    else:
+        discharge_rate = 0
+
+
     return render(request, 'admin.dashboard.html', {
         'total_appointment_count': total_appointment_count,
         'total_confirmed_appointment_count': total_confirmed_appointment_count,
         'total_pending_appointment_count': total_pending_appointment_count,
-        'total_cancelled_appointment_count': total_cancelled_appointment_count
+        'total_cancelled_appointment_count': total_cancelled_appointment_count,
+        'total_patient_count': total_patient_count,
+        'total_admitted_patient_count': total_admitted_patient_count,
+        'total_clinic_patient_count': total_clinic_patient_count,
+        'total_opd_patient_count': total_opd_patient_count,
+        'total_discharged_patient_count': total_discharged_patient_count,
+        'discharge_rate': discharge_rate,
+        'total_admitted_patient_count': total_admitted_patient_count,
+        'total_discharged_patient_count': total_discharged_patient_count,
+        'discharge_rate': discharge_rate,
     }) 
 
 # DoctorDashboard View
