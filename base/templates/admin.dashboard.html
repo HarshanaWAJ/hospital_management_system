@@ -186,9 +186,6 @@
 <script>
     // Assuming the discharge rate is passed from Django context as a percentage
     var dischargeRate = {{ discharge_rate }}; // The calculated discharge rate (as a percentage)
-    
-    // Debugging to check if values are correct
-    console.log("Discharge Rate:", dischargeRate);  // This should be a percentage
 
     document.addEventListener('DOMContentLoaded', function () {
         var ctx = document.getElementById('dischargeRateChart').getContext('2d');
@@ -215,6 +212,19 @@
                                 return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%'; // Show percentage in tooltip
                             }
                         }
+                    },
+                    datalabels: {
+                        // Enable datalabels plugin
+                        color: '#ffffff', // Text color of the labels
+                        font: {
+                            weight: 'bold', // Bold font for the percentage
+                            size: 14 // Font size for the percentage
+                        },
+                        formatter: function(value) {
+                            return value.toFixed(2) + '%'; // Format value as percentage
+                        },
+                        anchor: 'center', // Positioning of the labels at the center of the segments
+                        align: 'center', // Align the label text at the center
                     }
                 }
             }
@@ -222,5 +232,5 @@
     });
 </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 {% endblock %}
