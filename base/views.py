@@ -17,6 +17,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from appoinments.models import Appointment
+from patient.models import ClinicPatient, OPDPatient, AdmittedPatient
 # Views
 
 #Home with Contact Form
@@ -68,9 +69,9 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-
             # Get User Details
             user_details = {
+                'is_super_user': user.is_superuser,
                 'is_user': user.is_user,
                 'is_admin': user.is_admin,
                 'is_staff': user.is_staff,
@@ -78,20 +79,26 @@ def login_view(request):
             }
             print(user_details)
             login(request, user)
-            if (user.is_user):
-                return redirect('user_dashboard') 
-            elif (user.is_admin):
+
+            # Check user roles and redirect accordingly
+            if user.is_superuser:
+                return redirect('admin_dashboard')  # Redirect superuser to the admin dashboard
+            elif user.is_user:
+                return redirect('user_dashboard')
+            elif user.is_admin:
                 return redirect('admin_dashboard')
-            elif (user.is_staff):
+            elif user.is_staff:
                 return redirect('staff_dashboard')
-            elif (user.is_doctor):
+            elif user.is_doctor:
                 return redirect('doctor_dashboard')
             else:
                 messages.error(request, "No Authorities")
         else:
-            messages.error(request, "Invalid email or password")
+            # Instead of messages, pass an error flag to the context
+            return render(request, 'login.html', {'invalid_credentials': True})
 
     return render(request, 'login.html')
+
 
 
 
@@ -205,11 +212,36 @@ def admin_dashboard(request):
     total_confirmed_appointment_count = Appointment.objects.filter(status='Confirmed').count()
     total_pending_appointment_count = Appointment.objects.filter(status='Pending').count()
     total_cancelled_appointment_count = Appointment.objects.filter(status='Cancelled').count()
+    
+    # Patient Details
+    total_patient_count = ClinicPatient.objects.count() + OPDPatient.objects.count() + AdmittedPatient.objects.count()
+    total_admitted_patient_count = AdmittedPatient.objects.filter(status='Admitted').count()
+    total_clinic_patient_count = ClinicPatient.objects.count()
+    total_opd_patient_count = OPDPatient.objects.count()
+    total_discharged_patient_count = AdmittedPatient.objects.filter(status='Discharged').count()
+    sum_admitted_patient_count = AdmittedPatient.objects.count()
+
+    # Compare the total admitted patients with the total discharged patients
+    if sum_admitted_patient_count > 0:
+        discharge_rate = (total_discharged_patient_count / sum_admitted_patient_count) * 100
+    else:
+        discharge_rate = 0
+
+
     return render(request, 'admin.dashboard.html', {
         'total_appointment_count': total_appointment_count,
         'total_confirmed_appointment_count': total_confirmed_appointment_count,
         'total_pending_appointment_count': total_pending_appointment_count,
-        'total_cancelled_appointment_count': total_cancelled_appointment_count
+        'total_cancelled_appointment_count': total_cancelled_appointment_count,
+        'total_patient_count': total_patient_count,
+        'total_admitted_patient_count': total_admitted_patient_count,
+        'total_clinic_patient_count': total_clinic_patient_count,
+        'total_opd_patient_count': total_opd_patient_count,
+        'total_discharged_patient_count': total_discharged_patient_count,
+        'discharge_rate': discharge_rate,
+        'total_admitted_patient_count': total_admitted_patient_count,
+        'total_discharged_patient_count': total_discharged_patient_count,
+        'discharge_rate': discharge_rate,
     }) 
 
 # DoctorDashboard View
@@ -230,7 +262,26 @@ def doctor_dashboard(request):
 # StaffDashboard View
 @login_required
 def staff_dashboard(request):
-    return render(request, 'staff.dashboard.html') 
+    total_clinic_patient_count = ClinicPatient.objects.count()
+    total_opd_patient_count = OPDPatient.objects.count()
+    total_admitted_patient_count = AdmittedPatient.objects.count()
+    total_patient_count = total_admitted_patient_count+total_clinic_patient_count+total_opd_patient_count  
+
+    # Lists of patients
+    clinic_patients = ClinicPatient.objects.all()
+    opd_patients = OPDPatient.objects.all()
+    admitted_patients = AdmittedPatient.objects.all()
+
+    # return the view
+    return render(request, 'staff.dashboard.html', {
+        'total_patient_count': total_patient_count,
+        'total_clinic_patient_count': total_clinic_patient_count,
+        'total_opd_patient_count': total_opd_patient_count,
+        'total_admitted_patient_count': total_admitted_patient_count, 
+        'admitted_patients': admitted_patients, 
+        'clinic_patients': clinic_patients,
+        'opd_patients': opd_patients
+    }) 
 
 
 import os

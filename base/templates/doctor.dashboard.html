@@ -12,7 +12,7 @@
                 </div>
                 <div class="welcome_text">
                     <h2>Hello, {{ user.first_name }} {{ user.last_name }}</h2>
-                    <p>Welcome back to your dashboard.</p>
+                    <p>Welcome Back!</p>
                 </div>
             </div>
         </div>
@@ -77,10 +77,16 @@
                     <i class="fas fa-clipboard-list"></i> Appointments
                 </a>
             </div>
+            <div class="options">
+                <a href="{% url 'add_record' %}" class="btn">
+                    <i class="fas fa-notes-medical"></i> Patient Records
+                </a>
+            </div>
         </div>
     </div>
     <!-- Link to Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
 {% endblock %}

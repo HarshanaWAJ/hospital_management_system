@@ -318,7 +318,7 @@ body {
     max-width: 200px;
   }
 
-  /* Main styling for the summary */
+/* Main styling for the summary */
 .appointment-summary {
     padding: 20px;
     background-color: #bebebe;
@@ -327,3 +327,12 @@ body {
     align-items: center;
 }
 
+.patient-summary-details {
+    display: flex;
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+    background-color: #f8f9fa; /* Soft background color */
+    border-radius: 8px;
+    justify-content: space-between; /* Distribute cards evenly across the row */
+    flex-wrap: nowrap; /* Ensure no wrapping of cards */
+}

@@ -1,0 +1,217 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Records Management - Hospital Management System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="mb-4">Records Management</h2>
+
+        <!-- Filter Form -->
+        <div class="form-group mb-4">
+            <div class="input-group">
+                <!-- Smaller input field -->
+                <input type="text" class="form-control form-control-sm mb-2" id="ref_no" placeholder="Search by Reference Number" oninput="filterRecords()" aria-label="Search by Reference Number">
+                <!-- Add a gap between the input field and reset button -->
+                <div class="input-group-append ml-2">
+                    <button class="btn btn-danger btn-sm ml-2" type="button" onclick="clearFilter()">Clear Filter</button>
+                </div>
+            </div>
+        </div>
+
+        {% if record_list %}
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="text-center" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <div class="spinner-border" style="width: 3rem; height: 3rem; border-top: 4px solid #3A9D6F; border-right: 4px solid #3A9D6F;" role="status">
+                    <!-- Removed loading text -->
+                </div>
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered table-hover" id="recordsTable">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Reference Number</th>
+                        <th>Patient Name</th>
+                        <th>Patient Age</th>
+                        <th>Medical History</th>
+                        <th>Diagnosis</th>
+                        <th>Treatment</th>
+                        <th>Date</th>
+                        <!-- <th>Prescription</th> -->
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in record_list %}
+                        <tr class="record-row">
+                            <td>{{ record.ref_no }}</td>
+                            <td>{{ record.patient_name }}</td>
+                            <td>{{ record.patient_age }}</td>
+                            <td>{{ record.medical_history }}</td>
+                            <td>{{ record.diagnosis }}</td>
+                            <td>{{ record.treatment }}</td>
+                            <td>{{ record.date }}</td>
+                            <!-- <td>{{ record.prescription }}</td> -->
+                            <td>
+                                <!-- View Prescription Button -->
+                                <button class="btn btn-success btn-sm" onclick="viewPrescription('{{ record.ref_no }}', '{{ record.patient_name }}', '{{ record.diagnosis|escapejs }}', '{{ record.prescription|escapejs }}')">View Prescription</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-muted">No records available.</p>
+        {% endif %}
+    </div>
+
+    <!-- Prescription Modal -->
+    <div class="modal fade" id="prescriptionModal" tabindex="-1" aria-labelledby="prescriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="prescriptionModalLabel">Prescription Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <h6><strong>Reference Number:</strong> <span id="modalRefNo"></span></h6>
+                        <h6><strong>Patient Name:</strong> <span id="modalPatientName"></span></h6>
+                        <p><strong>Diagnosis:</strong> <span id="modalDiagnosis"></span></p>
+                        <h6><strong>Prescription:</strong></h6>
+                        <p id="modalPrescription"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="printPrescription()">Print <i class="bi bi-printer"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to show modal with prescription details
+        function viewPrescription(refNo, patientName, diagnosis, prescription) {
+            // Escape special characters in the prescription to prevent rendering issues
+            prescription = prescription.replace(/&/g, "&amp;")
+                                       .replace(/</g, "&lt;")
+                                       .replace(/>/g, "&gt;")
+                                       .replace(/"/g, "&quot;")
+                                       .replace(/'/g, "&#39;");
+            
+            // Split prescription into an array by commas (or another delimiter if needed)
+            const prescriptionArray = prescription.split(',');
+
+            // Format the prescription as an unordered list with each item as a list element
+            const formattedPrescription = prescriptionArray.map(item => `<li>${item.trim()}</li>`).join('');
+
+            // Populate modal content with relevant data
+            document.getElementById("modalRefNo").textContent = refNo;
+            document.getElementById("modalPatientName").textContent = patientName;
+            document.getElementById("modalDiagnosis").textContent = diagnosis;
+            document.getElementById("modalPrescription").innerHTML = `<ul>${formattedPrescription}</ul>`;  // Wrapping prescription in <ul>
+
+            // Show the modal using Bootstrap's Modal API
+            const myModal = new bootstrap.Modal(document.getElementById('prescriptionModal'));
+            myModal.show();
+        }
+
+        // Function to print prescription details with best UI/UX
+        function printPrescription() {
+            const printContent = document.getElementById("prescriptionModal").querySelector(".modal-body").innerHTML;
+            const printWindow = window.open('', '', 'width=800,height=600');
+
+            // Create print content structure with header, body, and footer (seal section)
+            const printHtml = `
+                <html>
+                <head>
+                    <title>Care-Bridge Automating System</title>
+                    <style>
+                        body { 
+                            font-family: 'Times New Roman', serif; 
+                            margin: 40px; 
+                        }
+                        .content { 
+                            padding: 20px;
+                            margin-bottom: 30px; 
+                            border: 1px solid #000; 
+                        }
+                        h2 {
+                            text-align: center;
+                            font-size: 24px;
+                            margin-bottom: 20px;
+                        }
+                        h6, p { 
+                            font-size: 16px;
+                            margin-bottom: 10px;
+                        }
+                        .footer { 
+                            text-align: center; 
+                            margin-top: 40px; 
+                        }
+                        .seal { 
+                            border-top: 1px solid #000; 
+                            padding-top: 10px; 
+                            font-weight: bold; 
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="content">
+                        <h2>Prescription Details</h2>
+                        <div>
+                            <h6><strong>Reference Number:</strong> ${document.getElementById("modalRefNo").textContent}</h6>
+                            <h6><strong>Patient Name:</strong> ${document.getElementById("modalPatientName").textContent}</h6>
+                            <p><strong>Diagnosis:</strong> ${document.getElementById("modalDiagnosis").textContent}</p>
+                            <h6><strong>Prescription:</strong></h6>
+                            <p>${document.getElementById("modalPrescription").innerHTML}</p>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="seal">
+                            <p><strong>Authorized Party</strong></p>
+                            <!-- Example Seal Image -->
+                            <img src="{% static 'images/seal.png' %}" alt="Company Seal" style="max-width: 150px;"/>
+                        </div>
+                    </div>
+                </body>
+                </html>`;
+
+            printWindow.document.write(printHtml);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Filter records (your existing filter function)
+        function filterRecords() {
+            document.getElementById("loadingSpinner").style.display = "block";
+            const filterValue = document.getElementById("ref_no").value.toLowerCase();
+            const rows = document.querySelectorAll("#recordsTable .record-row");
+            rows.forEach(row => {
+                const refNo = row.querySelector("td").textContent.toLowerCase();
+                if (refNo.includes(filterValue)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+            setTimeout(() => {
+                document.getElementById("loadingSpinner").style.display = "none";
+            }, 300);
+        }
+
+        // Clear filter function
+        function clearFilter() {
+            document.getElementById("ref_no").value = '';
+            filterRecords();
+        }
+    </script>
+
+    <!-- Bootstrap and Popper.js CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJv+XzggcY5nJ8Fv5DkLTiA8d3sqcfHX4NcbkOtnxP9d28fJP3v+Qj9Q5Zms" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybB5y8pPQA9OZ4Igz5ZrYwvBU5IuZy9Ac5bR9hHLbsuV9zQ85" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0XzbtmNTp3fXphfa3gJtWcFjX5mAP++IuJRa3oH2dAf6K+gGj" crossorigin="anonymous"></script>
+
+{% endblock %}

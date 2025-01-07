@@ -8,7 +8,7 @@ def register_staff(request):
         form = StaffRegForm(request.POST)
         if form.is_valid():
             form.save()  # Save the form data (creates a new Doctor instance)
-            return redirect('doctor_list')  # Redirect after successful form submission
+            return redirect('staff_management')  # Redirect after successful form submission
         else:
             # Print form errors if form is not valid
             print("Form is not valid!")

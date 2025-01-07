@@ -1,0 +1,201 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Create a New OPD Patient - Hospital Management System{% endblock %}
+
+{% block content %}
+<section class="h-custom">
+    <!-- Include Bootstrap 5 CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+    <div class="container mt-5">
+        <!-- Heading -->
+        <h1 class="text-center mb-5 fw-bold doctor-form-title">OPD Patient Details Registration</h1>
+
+        <!-- Form start -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Personal Information Section -->
+            <div class="card border-success mb-4">
+                <div class="card-header">
+                    <h5>Personal Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Registration ID -->
+                        <div class="col-md-6 mb-3">
+                            <label for="reg_id" class="form-label">Registration ID</label>
+                            {{ form.reg_id }}
+                            {% if form.reg_id.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.reg_id.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- First Name -->
+                        <div class="col-md-6 mb-3">
+                            <label for="first_name" class="form-label">First Name</label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.first_name.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Last Name -->
+                        <div class="col-md-6 mb-3">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.last_name.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="col-md-6 mb-3">
+                            <label for="dob" class="form-label">Date of Birth</label>
+                            {{ form.dob }}
+                            {% if form.dob.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.dob.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="col-md-6 mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            {{ form.gender }}
+                            {% if form.gender.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.gender.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- Marital Status -->
+                        <div class="col-md-6 mb-3">
+                            <label for="marital_status" class="form-label">Marital Status</label>
+                            {{ form.marital_status }}
+                            {% if form.marital_status.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.marital_status.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information Section -->
+            <div class="card border-success mb-4">
+                <div class="card-header">
+                    <h5>Contact Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Contact Number -->
+                        <div class="col-md-6 mb-3">
+                            <label for="contact_no" class="form-label">Contact Number</label>
+                            <div class="input-group">
+                                {{ form.contact_no }}
+                            </div>
+                            {% if form.contact_no.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.contact_no.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Email -->
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <div class="input-group">
+                                {{ form.email }}
+                            </div>
+                            {% if form.email.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.email.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Address -->
+                        <div class="md-6 mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            {{ form.address }}
+                            {% if form.address.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.address.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Details Section -->
+            <div class="card border-success mb-4">
+                <div class="card-header">
+                    <h5>Registration Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- OPD Registration ID -->
+                        <div class="col-md-6 mb-3">
+                            <label for="opd_reg_id" class="form-label">OPD Registration ID</label>
+                            {{ form.opd_reg_id }}
+                            {% if form.opd_reg_id.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.opd_reg_id.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success">Register Patient</button>
+            </div>
+        </form>
+        <!-- Form End -->
+    </div>
+</section>
+
+<!-- Include Bootstrap 5 JavaScript from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom Styles -->
+<link rel="stylesheet" href="{% static 'css/doctor_registration.css' %}">
+
+{% endblock %}
