@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .add_record_form import MedicalRecordForm
+from .models import Record
 
 def add_record(request):
     if request.method == 'POST':
@@ -13,3 +14,9 @@ def add_record(request):
         form = MedicalRecordForm()  # Initialize an empty form if GET request
 
     return render(request, 'add.record.html', {'form': form})
+
+
+def view_record(request):
+    record_list = Record.objects.all()  # Retrieve all records from the database
+    return render(request, 'view.records.html', 
+                  {'record_list': record_list}) 
