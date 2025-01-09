@@ -1,0 +1,47 @@
+/* Style for popup */
+.popup-content {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+/* Hover effects for buttons */
+.btn:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+/* Custom CSS for "In Stock", "Low Stock", "Out of Stock", and "Expired" */
+.stock-in-stock {
+    color: #fff; /* White text */
+    background-color: #28a745; /* Green background for 'In Stock' */
+}
+
+.stock-low-stock {
+    color: #fff; /* White text */
+    background-color: #dc3545; /* Red background for 'Low Stock' */
+}
+
+.stock-out-of-stock {
+    color: #fff; /* White text */
+    background-color: #ffc107; /* Yellow background for 'Out of Stock' */
+}
+
+.stock-expired {
+    color: #fff; /* White text */
+    background-color: #6c757d; /* Gray background for 'Expired' */
+}
+
+.fas {
+    margin-right: 5px; /* Adjust space between icon and text */
+}

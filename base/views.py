@@ -88,7 +88,11 @@ def login_view(request):
             elif user.is_admin:
                 return redirect('admin_dashboard')
             elif user.is_staff:
-                return redirect('staff_dashboard')
+                # Check if the staff position is 'Pharmacist'
+                if user.staff.position == 'Pharmacist':
+                    return redirect('stock_dashboard')  # Redirect pharmacist to the stock management page
+                else:
+                    return redirect('staff_dashboard')  # Redirect other staff members to the staff dashboard
             elif user.is_doctor:
                 return redirect('doctor_dashboard')
             else:
@@ -98,6 +102,7 @@ def login_view(request):
             return render(request, 'login.html', {'invalid_credentials': True})
 
     return render(request, 'login.html')
+
 
 
 

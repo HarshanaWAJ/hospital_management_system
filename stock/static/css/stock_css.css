@@ -1,0 +1,9 @@
+/* Ensuring the text color is white for table rows inside the .table element */
+.table tbody tr {
+    color: white !important;  /* Use !important if needed to override any conflicting styles */
+}
+
+/* If you want to ensure that certain background classes (bg-danger, bg-warning, bg-success) have white text */
+.table .bg-danger, .table .bg-warning, .table .bg-success {
+    color: white !important;  /* Apply white text for specific background color classes */
+}

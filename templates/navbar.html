@@ -38,6 +38,7 @@
                                 <li><a class="dropdown-item" href="{% url 'doctor_dashboard' %}">Doctor Dashboard</a></li>
                             {% elif request.user.is_staff %}
                                 <li><a class="dropdown-item" href="{% url 'staff_dashboard' %}">Staff Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{% url 'stock_dashboard' %}">Stocks</a></li>
                             {% else %}
                                 <li><a class="dropdown-item" href="#">Dashboard</a></li> <!-- Fallback -->
                             {% endif %}
