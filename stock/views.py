@@ -24,3 +24,4 @@ def view_stock_dashboard(request):
         'suppliers': suppliers,
         'user': request.user  # Explicitly passing the user object to the template
     })
+
